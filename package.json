@@ -5,9 +5,8 @@
   "author": "raymondware",
   "license": "MIT",
   "repository": "raymondware/swigg",
-  "main": "dist/index.js",
-  "module": "dist/index.es.js",
-  "jsnext:main": "dist/index.es.js",
+  "main": "dist/swigg.js",
+  "module": "dist/swigg.js",
   "engines": {
     "node": ">=8",
     "npm": ">=5"
@@ -16,7 +15,10 @@
     "build": "webpack --mode production"
   },
   "peerDependencies": {
-    "prop-types": "^15.5.4"
+    "prop-types": "^15.5.4",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "styled-components": "^5.0.1"
   },
   "dependencies": {
     "react": "^16.12.0",
