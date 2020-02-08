@@ -54,7 +54,17 @@ module.exports = {
   },
   // Here we define explicitly the file types we intend to deal with
   resolve: {
-    extensions: ['.scss', '.js', '.json', '.png', '.gif', '.jpg', '.svg']
+    extensions: ['.scss', '.js', '.json', '.png', '.gif', '.jpg', '.svg'],
+    alias: {
+      react: path.resolve('./node_modules/react'),
+      'react-dom': path.resolve('./node_modules/react-dom'),
+      'styled-components': path.resolve('./node_modules/styled-components')
+    }
+  },
+  externals: {
+    react: 'react',
+    'react-dom': 'react-dom',
+    'styled-components': 'styled-components'
   },
   // This is where we define how everything gets output.
   // dist is a common output folder, and it should be gitignored. The build can

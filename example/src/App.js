@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 
-import { ProjectCard } from 'swigg'
+import { Button } from 'swigg'
 
 export default class App extends Component {
   render () {
     return (
       <div>
-        <ProjectCard />
+        <Button />
       </div>
     )
   }
