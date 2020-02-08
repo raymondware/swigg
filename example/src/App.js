@@ -7,7 +7,10 @@ export default class App extends Component {
     return (
       <div>
         <Button />
-        <ProjectCard />
+        <ProjectCard title="Party City" bgOverlay="linear-gradient(45deg, blue, purple)" />
+        <ProjectCard title="Another Component" bgOverlay="grey" />
+        <ProjectCard title="This lib is sick" bgOverlay="salmon" />
+        <ProjectCard title="Pretty dope" bgOverlay="lightgreen" />
       </div>
     )
   }
