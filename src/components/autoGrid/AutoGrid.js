@@ -5,7 +5,7 @@ const GridArea = styled.div`
     padding: ${props => props.padding || '25px'}; 
     display: grid; 
     grid-gap: ${props => props.spacing || '25px'};
-    background: blue;
+    background: ${props => props.background || 'white'};
     grid-template-columns: repeat(auto-fit, minmax(${props => props.minWidth || '350px'}, 1fr));
 
     @media screen and (max-width: ${props => props.minWidth || '350px'}) {
@@ -15,7 +15,7 @@ const GridArea = styled.div`
 
 const AutoGrid = props => {
   return (
-    <GridArea minWidth={props.minWidth} padding={props.padding} spacing={props.spacing}>
+    <GridArea>
       {props.children}
     </GridArea>
   )
