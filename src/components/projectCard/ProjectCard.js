@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
-width: 80%;
+width: 100%;
 max-width: 400px;
 margin: 0 auto;
 box-shadow: 0 15px 30px 0 rgba(0,0,0,0.11),
