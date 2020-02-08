@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 const Wrapper = styled.div`
 width: 100%;
-max-width: 400px;
+max-width: ${props => props.maxWidth || '350px'};
 margin: 0 auto;
 box-shadow: 0 15px 30px 0 rgba(0,0,0,0.11),
           0 5px 15px 0 rgba(0,0,0,0.08);
@@ -32,55 +32,55 @@ transition: all .5s;
 `
 
 const ProjectHeader = styled.div`
-width: 100%;
-margin: 0 auto;
-height: 145px; 
-position: relative;
-overflow: hidden;  
-background-size: cover;
-background-position: center;
-background-image: url(${props => props.bgImage});
-background-repeat: no-repeat;
+  width: 100%;
+  margin: 0 auto;
+  height: 145px; 
+  position: relative;
+  overflow: hidden;  
+  background-size: cover;
+  background-position: center;
+  background-image: url(${props => props.bgImage});
+  background-repeat: no-repeat;
 
-&:after {
-  content: '';
-  width: 145%;
-  height: auto;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  transform: rotate(-20deg) scale(1);
-}
+  &:after {
+    content: '';
+    width: 145%;
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    transform: rotate(-20deg) scale(1);
+  }
 `
 
 const ProjectContent = styled.div`
-background: #fff;
-padding: 25px 20px;
-color: #413E46;
-text-shadow: none;
-height: 100%;
+  background: #fff;
+  padding: 25px 20px;
+  color: #413E46;
+  text-shadow: none;
+  height: 100%;
 
-p {
-  color: #BAB9BE;
-  font-size: .75em;
-  text-align: left;
-  margin: 0 0 0 0;
-}
+  p {
+    color: #BAB9BE;
+    font-size: .75em;
+    text-align: left;
+    margin: 0 0 0 0;
+  }
 `
 
 const Text = styled.div`
-font-size: .9em;
-margin: 0 0 5px 0;
+  font-size: .9em;
+  margin: 0 0 5px 0;
 `
 
 const Title = styled.div`
-font-family: 'ubuntu', Helvetica, Arial, sans-serif;
-font-size: 1.25em;
-font-weight: 700;
-margin-bottom: 5px;
+  font-family: 'ubuntu', Helvetica, Arial, sans-serif;
+  font-size: 1.25em;
+  font-weight: 700;
+  margin-bottom: 5px;
 `
 
 const OverlayContainer = styled.div`
@@ -102,8 +102,8 @@ const OverlayContainer = styled.div`
 
 const Overlay = ({bg, opacityVal, display, mediaDisplay}) => (<OverlayContainer bg={bg} opacityVal={opacityVal} display={display} mediaDisplay={mediaDisplay} />)
 
-const ProjectCard = ({ title, link, children, bgOverlay, bgImage, techList }) => (
-  <Wrapper data-sal="slide-up" data-sal-delay="100" data-sal-easing="ease-in" href={link} target="_blank" rel="noopener noreferrer">
+const ProjectCard = ({ maxWidth, title, link, children, bgOverlay, bgImage, techList }) => (
+  <Wrapper maxWidth={maxWidth} data-sal="slide-up" data-sal-delay="100" data-sal-easing="ease-in" href={link} target="_blank" rel="noopener noreferrer">
     <ProjectHeader bgImage={bgImage}>
     <Overlay bg={bgOverlay} opacityVal=".75" display="block" />
     </ProjectHeader >
@@ -116,6 +116,7 @@ const ProjectCard = ({ title, link, children, bgOverlay, bgImage, techList }) =>
 )
 
 ProjectCard.propTypes = {
+  maxWidth: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
@@ -125,6 +126,7 @@ ProjectCard.propTypes = {
 }
 
 ProjectCard.defaultProps = {
+  maxWidth: "450px",
   title: "Project Title",
   link: "https://www.raymondware.com",
   children: "Description",
