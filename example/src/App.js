@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { ProjectCard, AutoGrid, MasonryGrid, MainNav } from 'swigg'
+import { ProjectCard, AutoGrid, MasonryGrid, MainNav, Button } from 'swigg'
 
 export default class App extends Component {
   render () {
@@ -12,7 +12,9 @@ export default class App extends Component {
       <React.Fragment>
         <MainNav />
         <AutoGrid bg="#212121" minWidth="250px" spacing="45px" padding="45px">
-          <ProjectCard maxWidth="250px" title="Party City" bgOverlay="linear-gradient(45deg, steelblue, darkorchid)" />
+          <ProjectCard maxWidth="250px" title="Party City" bgOverlay="linear-gradient(45deg, steelblue, darkorchid)">
+            <Button />
+          </ProjectCard>
           <ProjectCard maxWidth="250px" title="Another Component" bgOverlay="grey" />
           <ProjectCard maxWidth="250px" title="This lib is sick" bgOverlay="darkkhaki" />
           <ProjectCard maxWidth="250px" title="Pretty dope" bgOverlay="aquamarine" />
