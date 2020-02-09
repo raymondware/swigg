@@ -52,7 +52,7 @@ const PrimaryButton = styled.div`
 const Button = props => {
   return (
     <PrimaryButton>
-      Hi
+      {props.children}
     </PrimaryButton>
   )
 }
