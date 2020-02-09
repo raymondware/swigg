@@ -41,7 +41,7 @@ const MasonryGrid = ({ items, padding }) => {
   return (
     <GridWrapper padding={padding}>
       { items.map((item, index) => {
-        return <Elm key={index} style={{ backgroundImage: `url(${item.image})` }} onClick={item.clickCallback ? item.clickCallback : () => {}} />
+        return <Elm key={index} style={{ backgroundImage: `url(${item.image})`, cursor: item.clickCallback ? 'pointer' : 'mouse' }} onClick={item.clickCallback ? item.clickCallback : () => {}} />
       }) }
     </GridWrapper>
   )
