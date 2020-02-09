@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const GridWrapper = styled.div`
+    box-sizing: border-box;
     width: 100%;
     margin: 0 auto;
     padding: ${props => props.padding || "25px"};
