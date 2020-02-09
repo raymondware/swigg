@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { ProjectCard, AutoGrid } from 'swigg'
+import { ProjectCard, AutoGrid, MasonryGrid } from 'swigg'
 
 export default class App extends Component {
   render () {
@@ -32,6 +32,50 @@ export default class App extends Component {
           <ProjectCard maxWidth="650px" title="Dynamic" bgOverlay="steelblue" bgImage="https://images.unsplash.com/photo-1581078253766-5876a6cabd72?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" />
           <ProjectCard maxWidth="650px" title="Dynamic" link="https://www.google.com" children="This is the description" techList={["party", "people", "tags"]} bgOverlay="tomato" bgImage="https://images.unsplash.com/photo-1581094935665-144e76b36c25?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" />
         </AutoGrid>
+
+        <MasonryGrid>
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+          <ProjectCard style={{ height: '100%', minHeight: '100%' }} maxWidth="650px" title="Another Component" bgOverlay="grey" />
+        </MasonryGrid>
       </React.Fragment>
     )
   }
