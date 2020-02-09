@@ -4,6 +4,9 @@ import { ProjectCard, AutoGrid, MasonryGrid } from 'swigg'
 
 export default class App extends Component {
   render () {
+    const someFunc = () => {
+      console.log('hi')
+    }
     return (
       <React.Fragment>
         <AutoGrid bg="#212121" minWidth="250px" spacing="45px" padding="45px">
@@ -35,7 +38,7 @@ export default class App extends Component {
 
         <MasonryGrid padding="45px" items={[
           {
-            link: "http://www.raymondware.com",
+            clickCallback: someFunc,
             image: "https://images.unsplash.com/photo-1581078253766-5876a6cabd72?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
           },{
             image: "https://images.unsplash.com/photo-1581078253766-5876a6cabd72?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
