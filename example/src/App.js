@@ -94,6 +94,63 @@ export default class App extends Component {
             image: "https://picsum.photos/200/300"
           }
         ]} />
+        <MasonryGrid bg="#fcfcfc" padding="45px" spacing="25px" colSize="350px" items={[
+          {
+            clickCallback: someFunc,
+            image: "https://images.unsplash.com/photo-1581078253766-5876a6cabd72?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
+          },{
+            image: "https://picsum.photos/200/300"
+          },{
+            image: "http://loremflickr.com/320/240/"
+          },{
+            image: "https://picsum.photos/200/300"
+          },{
+            image: "https://picsum.photos/200/300"
+          },{
+            image: "http://loremflickr.com/320/240/"
+          },{
+            image: "http://loremflickr.com/320/240/"
+          },{
+            clickCallback: someFunc,
+            image: "https://images.unsplash.com/photo-1581078253766-5876a6cabd72?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
+          },{
+            image: "https://picsum.photos/200/300"
+          },{
+            image: "http://loremflickr.com/320/240/"
+          },{
+            image: "https://picsum.photos/200/300"
+          },{
+            image: "https://picsum.photos/200/300"
+          },{
+            image: "http://loremflickr.com/320/240/"
+          },{
+            image: "http://loremflickr.com/320/240/"
+          },{
+            clickCallback: someFunc,
+            image: "https://images.unsplash.com/photo-1581078253766-5876a6cabd72?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
+          },{
+            image: "https://picsum.photos/200/300"
+          },{
+            image: "http://loremflickr.com/320/240/"
+          },{
+            image: "https://picsum.photos/200/300"
+          },{
+            image: "https://picsum.photos/200/300"
+          },{
+            image: "http://loremflickr.com/320/240/"
+          },{
+            image: "http://loremflickr.com/320/240/"
+          },{
+            clickCallback: someFunc,
+            image: "https://images.unsplash.com/photo-1581078253766-5876a6cabd72?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
+          },{
+            image: "https://picsum.photos/200/300"
+          },{
+            image: "http://loremflickr.com/320/240/"
+          },{
+            image: "https://picsum.photos/200/300"
+          }
+        ]} />
       </React.Fragment>
     )
   }
