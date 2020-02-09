@@ -14,7 +14,9 @@ export default class App extends Component {
         <Button>Click me</Button>
         <AutoGrid bg="#212121" minWidth="250px" spacing="45px" padding="45px">
           <ProjectCard maxWidth="250px" title="Party City" bgOverlay="linear-gradient(45deg, steelblue, darkorchid)">
-            <Button />
+            <Button>
+              Test
+            </Button>
           </ProjectCard>
           <ProjectCard maxWidth="250px" title="Another Component" bgOverlay="grey" />
           <ProjectCard maxWidth="250px" title="This lib is sick" bgOverlay="darkkhaki" />

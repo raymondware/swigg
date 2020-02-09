@@ -32,7 +32,7 @@ const lightenDarkenColor = (col, amt) => {
 const PrimaryButton = styled.div`
   background: #7162e8;
   width: 100%;
-  max-width: 450px;
+  max-width: 300px;
   padding: 12px 7px;
   margin: 0 auto;
   text-align: center;
@@ -43,6 +43,7 @@ const PrimaryButton = styled.div`
   font-weight: bold;
   transition: all 0.5s ease 0s;
   cursor: pointer;
+  line-height: 1em;
 
   &:hover {
     background-color: ${lightenDarkenColor('#7162e8', -20)};
