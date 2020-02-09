@@ -17,6 +17,7 @@ const Elm = styled.div`
   border-radius: 7px;
   background-size: cover;
   background-repeat: no-repeat;
+  position: relative;
   
   &:nth-child(odd) {
     grid-row-start: span 3;
@@ -25,13 +26,22 @@ const Elm = styled.div`
   &:nth-child(even) {
     grid-row-start: span 2;
   }
+
+  a {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 2;
+  }
 `
 
 const MasonryGrid = ({ items, padding }) => {
   return (
     <GridWrapper padding={padding}>
       { items.map((item, index) => {
-        return (<Elm key={index} style={{ backgroundImage: `url(${item})` }} />)
+        return item.link ? <Elm key={index} style={{ backgroundImage: `url(${item.image})` }}><a href={item.link} /></Elm> : <Elm key={index} style={{ backgroundImage: `url(${item.image})` }} />
       }) }
     </GridWrapper>
   )
