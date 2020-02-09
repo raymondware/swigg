@@ -33,7 +33,7 @@ const PrimaryButton = styled.div`
   background: #7162e8;
   width: 100%;
   max-width: 300px;
-  padding: 12px 7px;
+  padding: 15px 7px;
   margin: 0 auto;
   text-align: center;
   box-sizing: border-box;
