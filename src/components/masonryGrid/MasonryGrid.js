@@ -4,6 +4,7 @@ import styled from 'styled-components'
 const GridWrapper = styled.div`
     width: 100%;
     margin: 0 auto;
+    padding: ${props => props.padding || "25px"};
     display: grid;
     grid-gap: 10px;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -13,6 +14,8 @@ const GridWrapper = styled.div`
 
 const Elm = styled.div`
   border-radius: 7px;
+  background-size: cover;
+  background-repeat: no-repeat;
   
   &:nth-child(odd) {
     grid-row-start: span 3;
@@ -23,14 +26,12 @@ const Elm = styled.div`
   }
 `
 
-const MasonryGrid = props => {
+const MasonryGrid = ({ items, padding }) => {
   return (
-    <GridWrapper>
-      {props.children.map(child => {
-        return (<Elm>
-          { child }
-        </Elm>)
-      })}
+    <GridWrapper padding={padding}>
+      { items.map((item, index) => {
+        return (<Elm key={index} style={{ backgroundImage: `url(${item})` }} />)
+      }) }
     </GridWrapper>
   )
 }
