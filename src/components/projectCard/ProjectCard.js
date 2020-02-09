@@ -21,14 +21,14 @@ position: relative;
 font-family: "helvetica", arial, sans-serif;
 transition: all .5s;
 
-&:hover {
-  cursor: pointer;
-  transform: scale(1.05) translateY(-5px);
+${props => props.animation ? `&:hover {
+    cursor: pointer;
+    transform: scale(1.05) translateY(-5px);
 
-  h2 {
-    color: #000;
-  }
-}
+    h2 {
+      color: #000;
+    }
+  }` : ''}
 `
 
 const ProjectHeader = styled.div`
@@ -102,10 +102,10 @@ const OverlayContainer = styled.div`
 
 const Overlay = ({bg, opacityVal, display, mediaDisplay}) => (<OverlayContainer bg={bg} opacityVal={opacityVal} display={display} mediaDisplay={mediaDisplay} />)
 
-const ProjectCard = ({ maxWidth, title, link, children, bgOverlay, bgImage, techList }) => (
-  <Wrapper maxWidth={maxWidth} data-sal="slide-up" data-sal-delay="100" data-sal-easing="ease-in" href={link} target="_blank" rel="noopener noreferrer">
+const ProjectCard = ({ maxWidth, title, link, children, bgOverlay, bgImage, techList, animation }) => (
+  <Wrapper animation={animation} maxWidth={maxWidth} data-sal='slide-up' data-sal-delay='100' data-sal-easing='ease-in' href={link} target='_blank' rel='noopener noreferrer'>
     <ProjectHeader bgImage={bgImage}>
-    <Overlay bg={bgOverlay} opacityVal=".75" display="block" />
+      <Overlay bg={bgOverlay} opacityVal='.75' display='block' />
     </ProjectHeader >
     <ProjectContent>
       <Title>{title}</Title>
@@ -122,31 +122,33 @@ ProjectCard.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
   bgOverlay: PropTypes.string.isRequired,
   bgImage: PropTypes.string.isRequired,
-  techList: PropTypes.array.isRequired
+  techList: PropTypes.array.isRequired,
+  animation: PropTypes.bool
 }
 
 ProjectCard.defaultProps = {
-  maxWidth: "450px",
-  title: "Project Title",
-  link: "https://www.raymondware.com",
-  children: "Description",
-  bgOverlay: "linear-gradient(45deg, #333, #f7f7f7)",
-  bgImage: "https://images.unsplash.com/photo-1572510192261-e24ab8f31042?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-  techList: ["JavaScript", "React"]
+  maxWidth: '450px',
+  title: 'Project Title',
+  link: 'https://www.raymondware.com',
+  children: 'Description',
+  bgOverlay: 'linear-gradient(45deg, #333, #f7f7f7)',
+  bgImage: 'https://images.unsplash.com/photo-1572510192261-e24ab8f31042?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+  techList: ['JavaScript', 'React'],
+  animation: false
 }
 
 Overlay.propTypes = {
-    bg: PropTypes.string,
-    opacityVal: PropTypes.string,
-    display: PropTypes.string,
-    mediaDisplay: PropTypes.string
+  bg: PropTypes.string,
+  opacityVal: PropTypes.string,
+  display: PropTypes.string,
+  mediaDisplay: PropTypes.string
 }
-  
+
 Overlay.defaultProps = {
-    bg: '#333',
-    opacityVal: '.7',
-    display: 'none',
-    mediaDisplay: '960px'
+  bg: '#333',
+  opacityVal: '.7',
+  display: 'none',
+  mediaDisplay: '960px'
 }
 
 export default ProjectCard
