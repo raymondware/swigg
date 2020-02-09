@@ -8,7 +8,7 @@ const GridWrapper = styled.div`
     padding: ${props => props.padding || "25px"};
     display: grid;
     grid-gap: 10px;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(${props => props.colSize || '250px'}, 1fr));
     grid-auto-rows: minmax(100px, auto);
     grid-auto-flow: row;
 `
@@ -37,9 +37,9 @@ const Elm = styled.div`
   }
 `
 
-const MasonryGrid = ({ items, padding }) => {
+const MasonryGrid = ({ items, padding, colSize }) => {
   return (
-    <GridWrapper padding={padding}>
+    <GridWrapper padding={padding} colSize={colSize}>
       { items.map((item, index) => {
         return <Elm key={index} style={{ backgroundImage: `url(${item.image})`, cursor: item.clickCallback ? 'pointer' : 'mouse' }} onClick={item.clickCallback ? item.clickCallback : () => {}} />
       }) }
