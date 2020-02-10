@@ -17,13 +17,9 @@ import React, { Component } from 'react'
 
 import { Button } from 'swigg'
 
-class Example extends Component {
-  render () {
-    return (
-      <Button text="Click me" />
-    )
-  }
-}
+const App = () => (
+  <Button text="Click me" />
+)
 ```
 
 ## License
