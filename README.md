@@ -15,12 +15,12 @@ npm install --save swigg
 ```jsx
 import React, { Component } from 'react'
 
-import MyComponent from 'swigg'
+import { Button } from 'swigg'
 
 class Example extends Component {
   render () {
     return (
-      <MyComponent />
+      <Button text="Click me" />
     )
   }
 }
