@@ -102,15 +102,15 @@ const OverlayContainer = styled.div`
 
 const Overlay = ({bg, opacityVal, display, mediaDisplay}) => (<OverlayContainer bg={bg} opacityVal={opacityVal} display={display} mediaDisplay={mediaDisplay} />)
 
-const ProjectCard = ({ maxWidth, title, link, children, bgOverlay, bgImage, techList, animation }) => (
-  <Wrapper animation={animation} maxWidth={maxWidth} data-sal='slide-up' data-sal-delay='100' data-sal-easing='ease-in' href={link} target='_blank' rel='noopener noreferrer'>
-    <ProjectHeader bgImage={bgImage}>
-      <Overlay bg={bgOverlay} opacityVal='.75' display='block' />
+const ProjectCard = props => (
+  <Wrapper {...props} data-sal='slide-up' data-sal-delay='100' data-sal-easing='ease-in' target='_blank' rel='noopener noreferrer'>
+    <ProjectHeader bgImage={props.bgImage}>
+      <Overlay bg={props.bgOverlay} opacityVal='.75' display='block' />
     </ProjectHeader >
     <ProjectContent>
-      <Title>{title}</Title>
-      <Text>{children}</Text>
-      <p>{techList.join(', ')}</p>
+      <Title>{props.title}</Title>
+      <Text>{props.children}</Text>
+      <p>{props.techList.join(', ')}</p>
     </ProjectContent>
   </Wrapper>
 )

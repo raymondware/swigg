@@ -30,7 +30,7 @@ const lightenDarkenColor = (col, amt) => {
 }
 
 const PrimaryButton = styled.div`
-  background: #7162e8;
+  background: ${props => props.bgOverlay || '#7162e8'};
   width: 100%;
   max-width: 300px;
   padding: 15px 7px;
@@ -46,13 +46,13 @@ const PrimaryButton = styled.div`
   line-height: 1em;
 
   &:hover {
-    background-color: ${lightenDarkenColor('#7162e8', -20)};
+    background-color: ${props => (props.bgOverlay ? lightenDarkenColor(props.bgOverlay, -20) : lightenDarkenColor('#7162e8', -20))};
   }
 `
 
 const Button = props => {
   return (
-    <PrimaryButton>
+    <PrimaryButton {...props}>
       {props.children}
     </PrimaryButton>
   )
