@@ -1,7 +1,10 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const MainNavWrap = styled.div`
+    box-sizing: border-box;
+    background: ${props => props.bg};
     width: 100%;
     margin: 0 auto;
     padding: 5px;
@@ -19,9 +22,11 @@ const Nav = styled.nav`
 
         li {
           list-style-type: none;
+          color: ${props => props.fontColor};
 
           a {
             text-decoration: none;
+            color: ${props => props.fontColor};
           }
         }
     }
@@ -37,11 +42,22 @@ const MainNav = props => {
     <MainNavWrap {...props}>
       <Logo />
 
-      <Nav>
+      <Nav {...props}>
         {props.children}
       </Nav>
     </MainNavWrap>
   )
+}
+
+MainNav.propTypes = {
+  bg: PropTypes.string,
+  children: PropTypes.element.isRequired,
+  fontColor: PropTypes.string
+}
+
+MainNav.defaultProps = {
+  bg: '#fff',
+  fontColor: '#333'
 }
 
 export default MainNav

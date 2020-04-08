@@ -10,7 +10,14 @@ export default class App extends Component {
 
     return (
       <React.Fragment>
-        {/* <MainNav /> */}
+        <MainNav bg="#f8f8f8" fontColor="red">
+          <ul>
+            <li><a href="#">Projects</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </MainNav>
         <AutoGrid bg="#212121" minWidth="250px" spacing="45px" padding="45px">
           <ProjectCard maxWidth="250px" title="Party City" bgOverlay="linear-gradient(45deg, steelblue, darkorchid)" />
           <ProjectCard maxWidth="250px" title="here is the title" bgOverlay="linear-gradient(45deg, steelblue, darkorchid)" />
