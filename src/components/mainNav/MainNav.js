@@ -7,8 +7,6 @@ const MainNavWrap = styled.div`
     background: ${props => props.bg};
     width: 100%;
     margin: 0 auto;
-    padding: 5px;
-    display: grid;
 `
 
 const Logo = styled.div`
@@ -16,17 +14,31 @@ const Logo = styled.div`
 `
 
 const Nav = styled.nav`
+    margin: 0;
+    padding: 0;
 
     ul {
         list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
 
         li {
           list-style-type: none;
           color: ${props => props.fontColor};
+          font-size: 1.2em;
 
           a {
+            display: block;
             text-decoration: none;
             color: ${props => props.fontColor};
+            padding: 1em;
+            transition: all .4s;
+
+            &:hover {
+              background: red;
+              color: #fff;
+            }
           }
         }
     }
