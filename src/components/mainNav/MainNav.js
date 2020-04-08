@@ -16,18 +16,29 @@ const Nav = styled.nav`
 
     ul {
         list-style: none;
+
+        li {
+          list-style-type: none;
+
+          a {
+            text-decoration: none;
+          }
+        }
     }
 `
 
-const MainNav = () => {
+/* props
+    - link list as children. Full Ul > Li's expected to be passed
+      - This will solve the issue of different forms of routers being used.
+    - logo image
+*/
+const MainNav = props => {
   return (
-    <MainNavWrap>
+    <MainNavWrap {...props}>
       <Logo />
 
       <Nav>
-        <ul>
-          <li>hi</li>
-        </ul>
+        {props.children}
       </Nav>
     </MainNavWrap>
   )
