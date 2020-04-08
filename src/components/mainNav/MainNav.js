@@ -10,18 +10,27 @@ const MainNavWrap = styled.div`
 `
 
 const Logo = styled.div`
-
+  padding: .5em 5em;
+  background-color: lightblue;
 `
 
 const Nav = styled.nav`
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: space-between;
 
     button {
       display: none;
-      
+
       @media only screen and (max-width: 800px) {
+        background: burlywood;
         display: block;
+        padding: 1em;
+        font-size: 1.5rem;
+        border: none;
+        outline: none;
+        cursor: pointer;
       }
     }
 
@@ -46,8 +55,8 @@ const Nav = styled.nav`
           transition: all .4s;
 
           &:hover {
-            background: red;
-            color: #fff;
+            background: ${props => props.fontColor};
+            color: ${props => props.bg};
           }
         }
       }
@@ -55,7 +64,7 @@ const Nav = styled.nav`
       @media only screen and (max-width: 800px) {
         width: 100%;
         position: absolute;
-        top: 25px;
+        top: 4.78em;
         left: 0;
         margin: 0 auto;
         flex-direction: column;
@@ -66,6 +75,10 @@ const Nav = styled.nav`
           display: block;
           margin: 0;
         }
+      }
+
+      @media only screen and (max-width: 800px) {
+        background: ${props => props.bg};
       }
     }
 `
@@ -82,10 +95,9 @@ const MainNav = props => {
 
   return (
     <MainNavWrap {...props}>
-      <Logo />
-
       <Nav {...props} toggle={toggle}>
-        <button onClick={triggerToggle}>+ {toggle.toString()}</button>
+        <Logo />
+        <button onClick={triggerToggle}>+</button>
         {props.children}
       </Nav>
     </MainNavWrap>
