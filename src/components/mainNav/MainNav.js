@@ -18,7 +18,7 @@ const Nav = styled.nav`
     button {
       display: none;
 
-      @media only screen and (max-width: 800px) {
+      @media only screen and (max-width: ${props => props.breakPoint}) {
         background: burlywood;
         display: block;
         padding: 1em;
@@ -56,7 +56,7 @@ const Nav = styled.nav`
         }
       }
       
-      @media only screen and (max-width: 800px) {
+      @media only screen and (max-width: ${props => props.breakPoint}) {
         width: 100%;
         position: absolute;
         top: 4.78em;
@@ -72,7 +72,7 @@ const Nav = styled.nav`
         }
       }
 
-      @media only screen and (max-width: 800px) {
+      @media only screen and (max-width: ${props => props.breakPoint}) {
         background: ${props => props.bg};
       }
     }
@@ -98,12 +98,14 @@ MainNav.propTypes = {
   bg: PropTypes.string,
   logo: PropTypes.object.isRequired,
   children: PropTypes.element.isRequired,
-  fontColor: PropTypes.string
+  fontColor: PropTypes.string,
+  breakPoint: PropTypes.string
 }
 
 MainNav.defaultProps = {
   bg: '#fff',
-  fontColor: '#333'
+  fontColor: '#333',
+  breakPoint: '800px'
 }
 
 export default MainNav
