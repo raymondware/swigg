@@ -78,11 +78,6 @@ const Nav = styled.nav`
     }
 `
 
-/* props
-    - link list as children. Full Ul > Li's expected to be passed
-      - This will solve the issue of different forms of routers being used.
-    - logo image
-*/
 const MainNav = props => {
   const [toggle, setToggle] = useState(false)
 
