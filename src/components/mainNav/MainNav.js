@@ -2,23 +2,18 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const MainNavWrap = styled.div`
+const Logo = styled.div`
+  padding: .5em;
+`
+
+const Nav = styled.nav`
     box-sizing: border-box;
     background: ${props => props.bg};
     width: 100%;
     margin: 0 auto;
-`
-
-const Logo = styled.div`
-  padding: .5em 5em;
-  background-color: lightblue;
-`
-
-const Nav = styled.nav`
-    margin: 0;
-    padding: 0;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     button {
       display: none;
@@ -56,7 +51,7 @@ const Nav = styled.nav`
 
           &:hover {
             background: ${props => props.fontColor};
-            color: ${props => props.bg};
+            color: ${props => props.bg  };
           }
         }
       }
@@ -94,18 +89,19 @@ const MainNav = props => {
   const triggerToggle = () => setToggle(!toggle)
 
   return (
-    <MainNavWrap {...props}>
-      <Nav {...props} toggle={toggle}>
-        <Logo />
-        <button onClick={triggerToggle}>+</button>
-        {props.children}
-      </Nav>
-    </MainNavWrap>
+    <Nav {...props} toggle={toggle}>
+      <Logo>
+        <img src={props.logo.url} alt={props.logo.alt ? props.logo.alt : 'Logo'} />
+      </Logo>
+      <button onClick={triggerToggle}>+</button>
+      {props.children}
+    </Nav>
   )
 }
 
 MainNav.propTypes = {
   bg: PropTypes.string,
+  logo: PropTypes.object.isRequired,
   children: PropTypes.element.isRequired,
   fontColor: PropTypes.string
 }
