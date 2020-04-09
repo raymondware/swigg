@@ -15,10 +15,12 @@ const GridArea = styled.div`
 
 const AutoGrid = props => {
   return (
-    <GridArea bg={props.bg} minWidth={props.minWidth} padding={props.padding} spacing={props.spacing}>
+    <GridArea {...props}>
       {props.children}
     </GridArea>
   )
 }
+
+// TODO: Prop type validation
 
 export default AutoGrid
