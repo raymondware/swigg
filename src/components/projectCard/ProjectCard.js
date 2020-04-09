@@ -102,6 +102,7 @@ const OverlayContainer = styled.div`
 
 const Overlay = ({bg, opacityVal, display, mediaDisplay}) => (<OverlayContainer bg={bg} opacityVal={opacityVal} display={display} mediaDisplay={mediaDisplay} />)
 
+// TODO: Add href and aria if there is a link
 const ProjectCard = props => (
   <Wrapper {...props} data-sal='slide-up' data-sal-delay='100' data-sal-easing='ease-in' target='_blank' rel='noopener noreferrer'>
     <ProjectHeader bgImage={props.bgImage}>
