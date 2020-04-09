@@ -51,7 +51,7 @@ const Nav = styled.nav`
 
           &:hover {
             background: ${props => props.fontColor};
-            color: ${props => props.bg  };
+            color: ${props => props.bg};
           }
         }
       }
