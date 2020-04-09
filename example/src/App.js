@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-
 import { ProjectCard, AutoGrid, MasonryGrid, MainNav, Button } from 'swigg'
 
 export default class App extends Component {
