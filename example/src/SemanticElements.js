@@ -62,14 +62,14 @@ const SemanticElements = () => (<div><header role="banner">
               <h5>Heading 5</h5>
               <h6>Heading 6</h6>
             </div>
-            <footer><p><a href="#top">[Top]</a></p></footer>
+            <footer></footer>
           </article>
           <article id="text__paragraphs">
             <header><h1>Paragraphs</h1></header>
             <div>
               <p>A paragraph (from the Greek paragraphos, “to write beside” or “written beside”) is a self-contained unit of a discourse in writing dealing with a particular point or idea. A paragraph consists of one or more sentences. Though not required by the syntax of any language, paragraphs are usually an expected part of formal writing, used to organize longer prose.</p>
             </div>
-            <footer><p><a href="#top">[Top]</a></p></footer>
+            <footer></footer>
           </article>
           <article id="text__blockquotes">
             <header><h1>Blockquotes</h1></header>
@@ -80,7 +80,7 @@ const SemanticElements = () => (<div><header role="banner">
                 <cite><a href="#!">Said no one, ever.</a></cite>
               </blockquote>
             </div>
-            <footer><p><a href="#top">[Top]</a></p></footer>
+            <footer></footer>
           </article>
           <article id="text__lists">
             <header><h1>Lists</h1></header>
@@ -103,14 +103,14 @@ const SemanticElements = () => (<div><header role="banner">
                 <li>List Item 3</li>
               </ul>
             </div>
-            <footer><p><a href="#top">[Top]</a></p></footer>
+            <footer></footer>
           </article>
           <article id="text__hr">
             <header><h1>Horizontal rules</h1></header>
             <div>
               <hr/>
             </div>
-            <footer><p><a href="#top">[Top]</a></p></footer>
+            <footer></footer>
           </article>
           <article id="text__tables">
             <header><h1>Tabular data</h1></header>
@@ -165,7 +165,7 @@ const SemanticElements = () => (<div><header role="banner">
                 </tr>
               </tbody>
             </table>
-            <footer><p><a href="#top">[Top]</a></p></footer>
+            <footer></footer>
           </article>
           <article id="text__code">
             <header><h1>Code</h1></header>
@@ -182,7 +182,7 @@ const SemanticElements = () => (<div><header role="banner">
   ` a b c d e f g h i j k l m n o
   p q r s t u v w x y z | ~ </pre>
             </div>
-            <footer><p><a href="#top">[Top]</a></p></footer>
+            <footer></footer>
           </article>
           <article id="text__inline">
             <header><h1>Inline elements</h1></header>
@@ -206,7 +206,7 @@ const SemanticElements = () => (<div><header role="banner">
               <p>The <var>variable element</var>, such as <var>x</var> = <var>y</var>.</p>
               <p>The time element: <time datetime="2013-04-06T12:32+00:00">2 weeks ago</time></p>
             </div>
-            <footer><p><a href="#top">[Top]</a></p></footer>
+            <footer></footer>
           </article>
         </section>
         <section id="embedded">
@@ -224,42 +224,42 @@ const SemanticElements = () => (<div><header role="banner">
                 <figcaption>Here is a caption for this image.</figcaption>
               </figure>
             </div>
-            <footer><p><a href="#top">[Top]</a></p></footer>
+            <footer></footer>
           </article>
           <article id="embedded__audio">
             <header><h2>Audio</h2></header>
             <div><audio controls="">audio</audio></div>
-            <footer><p><a href="#top">[Top]</a></p></footer>
+            <footer></footer>
           </article>
           <article id="embedded__video">
             <header><h2>Video</h2></header>
             <div><video controls="">video</video></div>
-            <footer><p><a href="#top">[Top]</a></p></footer>
+            <footer></footer>
           </article>
           <article id="embedded__canvas">
             <header><h2>Canvas</h2></header>
             <div><canvas>canvas</canvas></div>
-            <footer><p><a href="#top">[Top]</a></p></footer>
+            <footer></footer>
           </article>
           <article id="embedded__meter">
             <header><h2>Meter</h2></header>
             <div><meter value="2" min="0" max="10">2 out of 10</meter></div>
-            <footer><p><a href="#top">[Top]</a></p></footer>
+            <footer></footer>
           </article>
           <article id="embedded__progress">
             <header><h2>Progress</h2></header>
             <div><progress>progress</progress></div>
-            <footer><p><a href="#top">[Top]</a></p></footer>
+            <footer></footer>
           </article>
           <article id="embedded__svg">
             <header><h2>Inline SVG</h2></header>
             <div><svg width="100px" height="100px"><circle cx="100" cy="100" r="100" fill="#1fa3ec"></circle></svg></div>
-            <footer><p><a href="#top">[Top]</a></p></footer>
+            <footer></footer>
           </article>
           <article id="embedded__iframe">
             <header><h2>IFrame</h2></header>
             <div><iframe src="index.html" height="300"></iframe></div>
-            <footer><p><a href="#top">[Top]</a></p></footer>
+            <footer></footer>
           </article>
         </section>
         <section id="forms">
@@ -304,7 +304,7 @@ const SemanticElements = () => (<div><header role="banner">
                 <input id="input__text4" className="is-valid" type="text" placeholder="Text Input" />
               </p>
             </fieldset>
-            <p><a href="#top">[Top]</a></p>
+            
             <fieldset id="forms__select">
               <legend>Select menus</legend>
               <p>
@@ -318,7 +318,7 @@ const SemanticElements = () => (<div><header role="banner">
                 </select>
               </p>
             </fieldset>
-            <p><a href="#top">[Top]</a></p>
+            
             <fieldset id="forms__checkbox">
               <legend>Checkboxes</legend>
               <ul className="list list--bare">
@@ -327,7 +327,7 @@ const SemanticElements = () => (<div><header role="banner">
                 <li><label for="checkbox3"><input id="checkbox3" name="checkbox" type="checkbox" /> Choice C</label></li>
               </ul>
             </fieldset>
-            <p><a href="#top">[Top]</a></p>
+            
             <fieldset id="forms__radio">
               <legend>Radio buttons</legend>
               <ul className="list list--bare">
@@ -336,7 +336,7 @@ const SemanticElements = () => (<div><header role="banner">
                 <li><label for="radio3"><input id="radio3" name="radio" type="radio" className="radio" /> Option 3</label></li>
               </ul>
             </fieldset>
-            <p><a href="#top">[Top]</a></p>
+            
             <fieldset id="forms__textareas">
               <legend>Textareas</legend>
               <p>
@@ -344,7 +344,7 @@ const SemanticElements = () => (<div><header role="banner">
                 <textarea id="textarea" rows="8" cols="48" placeholder="Enter your message here"></textarea>
               </p>
             </fieldset>
-            <p><a href="#top">[Top]</a></p>
+            
             <fieldset id="forms__html5">
               <legend>HTML5 inputs</legend>
               <p>
@@ -380,7 +380,7 @@ const SemanticElements = () => (<div><header role="banner">
                 <input type="datetime-local" id="idtl" value="1970-01-01T00:00" />
               </p>
             </fieldset>
-            <p><a href="#top">[Top]</a></p>
+            
             <fieldset id="forms__action">
               <legend>Action buttons</legend>
               <p>
@@ -396,7 +396,7 @@ const SemanticElements = () => (<div><header role="banner">
                 <button type="button" disabled>&lt;button disabled&gt;</button>
               </p>
             </fieldset>
-            <p><a href="#top">[Top]</a></p>
+            
           </form>
         </section>
       </main>
