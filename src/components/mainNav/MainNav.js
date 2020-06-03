@@ -7,6 +7,7 @@ const Logo = styled.div`
 `
 
 const Nav = styled.nav`
+  position: relative;
   box-sizing: border-box;
   background: ${props => props.bg};
   width: 100%;
@@ -14,7 +15,7 @@ const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: all 1s;
+  transition: all 0.6s;
 
   button {
     display: none;
@@ -85,6 +86,7 @@ const stickyStyles = `
     position: fixed;
     z-index: 9999;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 3px 6px rgba(0, 0, 0, 0.15);
+    transition: all 0.6s;
 `
 
 const MainNav = props => {

@@ -9,7 +9,7 @@ export default class App extends Component {
 
     return (
       <React.Fragment>
-        <MainNav bg="#f8f8f8" fontColor="slateblue" breakPoint="900px" logo={{ url: 'https://www.raymondware.com/images/footer-logo.png', alt: "raymond ware logo" }}>
+        <MainNav bg="#f8f8f8" fontColor="slateblue" breakPoint="900px" isSticky={true} logo={{ url: 'https://www.raymondware.com/images/footer-logo.png', alt: "raymond ware logo" }}>
           <ul>
             <li><a href="#">Projects</a></li>
             <li><a href="#">Services</a></li>
