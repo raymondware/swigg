@@ -1,14 +1,14 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { ProjectCard, AutoGrid, MasonryGrid, Gallery, MainNav, Button } from 'swigg'
+import { SelectListWrapper } from './components/selectListWrapper/SelectListWrapper'
 
-export default class App extends Component {
-  render () {
+const App = () => {
     const someFunc = () => {
       alert('Hi, this is a callback')
     }
 
     return (
-      <React.Fragment>
+      <div>
         <MainNav bg="#f8f8f8" fontColor="slateblue" breakPoint="900px" isSticky={true} logo={{ url: 'https://www.raymondware.com/images/footer-logo.png', alt: "raymond ware logo" }}>
           <ul>
             <li><a href="#">Projects</a></li>
@@ -34,6 +34,10 @@ export default class App extends Component {
           <ProjectCard animation={true} maxWidth="650px" title="Pretty dope" bgOverlay="aquamarine" />
           <ProjectCard animation={true} maxWidth="650px" title="Dynamic" bgOverlay="steelblue" bgImage="https://images.unsplash.com/photo-1581078253766-5876a6cabd72?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" />
           <ProjectCard animation={true} maxWidth="650px" title="Dynamic" link="https://www.google.com" children="This is the description" techList={["party", "people", "tags"]} bgOverlay="tomato" bgImage="https://images.unsplash.com/photo-1581094935665-144e76b36c25?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" />
+        </AutoGrid>
+
+        <AutoGrid>
+          <SelectListWrapper />
         </AutoGrid>
 
         <AutoGrid minWidth="150px" spacing="45px" padding="45px">
@@ -68,35 +72,37 @@ export default class App extends Component {
           }
         ]} />
 
-        < Gallery bg = "#fcfcfc"
-        padding = "45px"
-        spacing = "25px"
-        colSize = "350px"
-        items = {
-          [{
-            clickCallback: someFunc,
-            image: "https://images.unsplash.com/photo-1586184059726-49de3553308a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-          }, {
-            image: "https://images.unsplash.com/photo-1586055976087-8d80c1c69acd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-          }, {
-            image: "https://images.unsplash.com/photo-1586143191955-92c311d64c01?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-          }, {
-            image: "https://images.unsplash.com/photo-1586051972750-e5d57dcea12f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-          }, {
-            image: "https://images.unsplash.com/photo-1558981420-c532902e58b4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-          }, {
-            image: "https://images.unsplash.com/photo-1586166401060-89a3e535b8a4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-          }, {
-            image: "https://images.unsplash.com/photo-1586022045076-aee0a185180b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-          }, {
-            clickCallback: someFunc,
-            image: "https://images.unsplash.com/photo-1586115176276-3f7fe651ccf2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-          }, {
-            image: "https://images.unsplash.com/photo-1586155632969-f703b4b8da9f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
-          }]
-        }
+        <Gallery 
+          bg = "#fcfcfc"
+          padding = "45px"
+          spacing = "25px"
+          colSize = "350px"
+          items = {
+            [{
+              clickCallback: someFunc,
+              image: "https://images.unsplash.com/photo-1586184059726-49de3553308a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+            }, {
+              image: "https://images.unsplash.com/photo-1586055976087-8d80c1c69acd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+            }, {
+              image: "https://images.unsplash.com/photo-1586143191955-92c311d64c01?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+            }, {
+              image: "https://images.unsplash.com/photo-1586051972750-e5d57dcea12f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+            }, {
+              image: "https://images.unsplash.com/photo-1558981420-c532902e58b4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+            }, {
+              image: "https://images.unsplash.com/photo-1586166401060-89a3e535b8a4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+            }, {
+              image: "https://images.unsplash.com/photo-1586022045076-aee0a185180b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+            }, {
+              clickCallback: someFunc,
+              image: "https://images.unsplash.com/photo-1586115176276-3f7fe651ccf2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+            }, {
+              image: "https://images.unsplash.com/photo-1586155632969-f703b4b8da9f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"
+            }]
+          }
         />
-      </React.Fragment>
+      </div>
     )
-  }
 }
+
+export { App };
