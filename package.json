@@ -1,10 +1,13 @@
 {
   "name": "swigg",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1.2",
+  "description": ">",
   "author": "raymondware",
   "license": "MIT",
-  "repository": "raymondware/swigg",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raymondware/swigg.git"
+  },
   "main": "dist/swigg.js",
   "module": "dist/swigg.js",
   "engines": {
@@ -16,8 +19,7 @@
   },
   "peerDependencies": {
     "prop-types": "^15.5.4",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
+    "react": ">=16.12.0",
     "styled-components": "^5.0.1"
   },
   "devDependencies": {
@@ -51,5 +53,18 @@
   "files": [
     "dist"
   ],
-  "dependencies": {}
+  "bugs": {
+    "url": "https://github.com/raymondware/swigg/issues"
+  },
+  "homepage": "https://github.com/raymondware/swigg#readme",
+  "directories": {
+    "example": "example"
+  },
+  "keywords": [
+    "react",
+    "component",
+    "library",
+    "ui",
+    "elements"
+  ]
 }
