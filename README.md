@@ -13,8 +13,6 @@ npm install --save swigg
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
-
 import { Button } from 'swigg'
 
 const App = () => (
