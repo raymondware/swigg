@@ -22,7 +22,7 @@ const SelectListWrapper = () => {
     selectedItemClassList: "custom-selected-item-class",
     items: itemList,
     sendItems(items) {
-      MultiSelectListData.selectedItems = items;
+      updateSelectedItems(items)
     },
     initialSelectedItemList: [
       { id: 1, value: "Lorem ipsum dolor sit amet." },
