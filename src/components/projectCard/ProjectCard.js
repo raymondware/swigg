@@ -129,12 +129,12 @@ ProjectCard.propTypes = {
 
 ProjectCard.defaultProps = {
   maxWidth: '450px',
-  title: 'Project Title',
-  link: 'https://www.raymondware.com',
+  title: 'Title',
+  link: '',
   children: 'Description',
   bgOverlay: 'linear-gradient(45deg, #333, #f7f7f7)',
-  bgImage: 'https://images.unsplash.com/photo-1572510192261-e24ab8f31042?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-  techList: ['JavaScript', 'React'],
+  bgImage: '',
+  techList: [],
   animation: false
 }
 
