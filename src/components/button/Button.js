@@ -48,6 +48,8 @@ const PrimaryButton = styled.div`
   &:hover {
     background-color: ${props => (props.bgOverlay ? lightenDarkenColor(props.bgOverlay, -20) : lightenDarkenColor('#7162e8', -20))};
   }
+
+  ${props => props?.customStyles ? props.customStyles : ''}
 `
 
 const Button = props => {

@@ -12,6 +12,8 @@ const GridWrapper = styled.div`
     grid-template-columns: repeat(auto-fill, minmax(${props => props.colSize || '250px'}, 1fr));
     grid-auto-rows: minmax(100px, auto);
     grid-auto-flow: row;
+
+    ${props => props?.customStyles ? props.customStyles : ''}
 `
 
 const Elm = styled.div`

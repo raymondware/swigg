@@ -29,6 +29,8 @@ ${props => props.animation ? `&:hover {
       color: #000;
     }
   }` : ''}
+
+  ${props => props?.customStyles ? props.customStyles : ''}
 `
 
 const ProjectHeader = styled.div`

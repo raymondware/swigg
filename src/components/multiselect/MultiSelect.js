@@ -4,7 +4,7 @@ import { useCombobox } from "downshift";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 
-/** Use to create custom styled select lists for UI components. This component uses Downshift from Paypal to create accessible select lists. */
+/** Use to create custom styled select lists for UI components. This component uses Downshift to create accessible select lists. */
 const MultiSelect = forwardRef((props, ref) => {
   const [selectedItems, setSelectedItems] = useState([]);
 
