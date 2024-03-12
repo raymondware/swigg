@@ -7,7 +7,7 @@ import React, {
 import PropTypes from 'prop-types'
 import { useCombobox } from 'downshift'
 
-/** Use to create custom styled select lists for UI components. This component uses Downshift from Paypal to create accessible select lists. */
+/** Use to create custom styled select lists for UI components. This component uses Downshift to create accessible select lists. */
 const MultiSelect = forwardRef((props, ref) => {
   const [selectedItems, setSelectedItems] = useState([])
 

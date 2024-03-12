@@ -7,9 +7,17 @@ const App = () => {
       alert('Hi, this is a callback')
     }
 
+    const customeStyles = `
+      background: gold;
+
+      ul {
+        background: blue;
+      }
+    `
+
     return (
       <div>
-        <MainNav bg="#f8f8f8" fontColor="slateblue" breakPoint="900px" isSticky={true} logo={{ url: 'https://www.raymondware.com/images/footer-logo.png', alt: "raymond ware logo" }}>
+        <MainNav bg="#f8f8f8" fontColor="slateblue" breakPoint="900px" isSticky={true} customStyles={customeStyles} logo={{ url: 'https://www.raymondware.com/images/footer-logo.png', alt: "raymond ware logo" }}>
           <ul>
             <li><a href="#">Projects</a></li>
             <li><a href="#">Services</a></li>

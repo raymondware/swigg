@@ -79,7 +79,8 @@ const Nav = styled.nav`
     }
   }
   
-  ${props => props.sticky ? stickyStyles : null}
+  ${props => props?.sticky ? stickyStyles : null}
+  ${props => props?.customStyles ? props.customStyles : null}
 `
 
 const stickyStyles = `

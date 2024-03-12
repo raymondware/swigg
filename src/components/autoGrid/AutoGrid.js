@@ -11,6 +11,8 @@ const GridArea = styled.div`
     @media screen and (max-width: ${props => props.minWidth || '350px'}) {
       grid-template-columns: 100%;
     }
+
+    ${props => props?.customStyles ? props.customStyles : ''}
 `
 
 const AutoGrid = props => {
