@@ -1,47 +1,148 @@
-import React, {
-  useState,
-  useEffect,
-  forwardRef,
-  useImperativeHandle
-} from 'react'
+import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import { useCombobox } from 'downshift'
 
-/** Use to create custom styled select lists for UI components. This component uses Downshift to create accessible select lists. */
-const MultiSelect = forwardRef((props, ref) => {
-  const [selectedItems, setSelectedItems] = useState([])
+const SelectWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  margin-bottom: 1rem;
+`
 
-  const {
-    children: items,
-    label,
-    isEditable,
-    hasButton,
-    classList,
-    itemClassList,
-    selectedItemClassList,
-    buttonText,
-    sendItems,
-    initialSelectedItemList,
-    updateSelectedItems
-  } = props
+const Label = styled.label`
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: ${props => props.theme.typography.fontWeights.medium};
+  color: ${props => props.theme.colors.gray[700]};
+`
 
-  const getNodeItemsFromIds = (sentItems) => {
-    const results = []
-    sentItems.map((item) =>
-      items.map((i) =>
-        i.props.id === item.id.toString() ? results.push(i) : null
-      )
-    )
-    return results
+const SelectToggle = styled.div`
+  position: relative;
+  width: 100%;
+  min-height: 45px;
+  padding: 0.75rem 1rem;
+  border: 2px solid ${props => props.theme.colors.gray[300]};
+  border-radius: ${props => props.theme.borderRadius.md};
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: ${props => props.theme.colors.gray[400]};
   }
 
-  useEffect(() => {
-    setSelectedItems(initialSelectedItemList)
-  }, [])
+  &.is-open {
+    border-color: ${props => props.theme.colors.primary};
+    box-shadow: 0 0 0 3px ${props => props.theme.colors.primary}33;
+  }
+`
+
+const SelectedItems = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-right: ${props => props.hasButton ? '120px' : '30px'};
+
+  .count {
+    font-weight: ${props => props.theme.typography.fontWeights.medium};
+    margin-right: 0.5rem;
+  }
+
+  .items {
+    color: ${props => props.theme.colors.gray[600]};
+  }
+`
+
+const ActionButtons = styled.div`
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 0.5rem;
+`
+
+const Button = styled.button`
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: ${props => props.theme.borderRadius.sm};
+  font-size: ${props => props.theme.typography.fontSizes.sm};
+  font-weight: ${props => props.theme.typography.fontWeights.medium};
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &.primary {
+    background: ${props => props.theme.colors.primary};
+    color: white;
+
+    &:hover {
+      background: ${props => props.theme.colors.primary}dd;
+    }
+  }
+
+  &.secondary {
+    background: ${props => props.theme.colors.gray[200]};
+    color: ${props => props.theme.colors.gray[700]};
+
+    &:hover {
+      background: ${props => props.theme.colors.gray[300]};
+    }
+  }
+`
+
+const ItemsList = styled.ul`
+  position: absolute;
+  width: 100%;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid ${props => props.theme.colors.gray[200]};
+  border-radius: ${props => props.theme.borderRadius.md};
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+`
+
+const Item = styled.li`
+  padding: 0.75rem 1rem;
+  border-radius: ${props => props.theme.borderRadius.sm};
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: ${props => props.theme.colors.gray[100]};
+  }
+
+  &.is-active {
+    background: ${props => props.theme.colors.primary}11;
+    color: ${props => props.theme.colors.primary};
+  }
+
+  &.is-highlighted {
+    background: ${props => props.theme.colors.gray[100]};
+  }
+`
+
+/** Use to create custom styled select lists for UI components. This component uses Downshift to create accessible select lists. */
+const MultiSelect = forwardRef(({
+  items,
+  label,
+  isEditable = true,
+  hasButton = true,
+  buttonText = 'Done',
+  className = '',
+  itemClassName = '',
+  selectedItemClassName = '',
+  onSelectionChange = () => {},
+  initialSelected = [],
+  disabled = false,
+  closeOnSelect = false
+}, ref) => {
+  const [selectedItems, setSelectedItems] = useState(initialSelected)
 
   useEffect(() => {
-    sendItems(selectedItems)
-    updateSelectedItems(selectedItems)
+    onSelectionChange(selectedItems)
   }, [selectedItems])
 
   const {
@@ -55,32 +156,18 @@ const MultiSelect = forwardRef((props, ref) => {
     getItemProps,
     openMenu,
     closeMenu,
-    setHighlightedIndex,
-    selectItem
+    setHighlightedIndex
   } = useCombobox({
     items,
     onSelectedItemChange: ({ selectedItem }) => {
-      if (!selectedItem) {
-        return
-      }
-      const selectedItemAlreadySelected =
-        selectedItems.length > 0 && selectedItem
-          ? selectedItems.find(
-            (item) => item.props.id === selectedItem.props.id
-          )
-          : false
+      if (!selectedItem) return
 
-      if (selectedItemAlreadySelected && selectedItems.length >= 1) {
-        setSelectedItems(
-          selectedItems
-            .map((item) =>
-              item.props.id !== selectedItem.props.id ? item : null
-            )
-            .filter(Boolean)
-        )
-      } else {
-        setSelectedItems([...selectedItems, selectedItem])
-      }
+      setSelectedItems(prev => {
+        const isSelected = prev.some(item => item.id === selectedItem.id)
+        return isSelected
+          ? prev.filter(item => item.id !== selectedItem.id)
+          : [...prev, selectedItem]
+      })
     },
     stateReducer: (state, actionAndChanges) => {
       const { changes, type } = actionAndChanges
@@ -89,230 +176,115 @@ const MultiSelect = forwardRef((props, ref) => {
         case useCombobox.stateChangeTypes.ItemClick:
           return {
             ...changes,
-            highlightedIndex: changes.selectedItem.props.id - 1,
-            isOpen: true // keep the menu open after selection.
+            // Keep the menu open unless closeOnSelect is true
+            isOpen: !closeOnSelect,
+            // Maintain highlight on the selected item
+            highlightedIndex: state.highlightedIndex
           }
-        case useCombobox.stateChangeTypes.ItemMouseMove:
-        case useCombobox.stateChangeTypes.MenuMouseLeave:
-        case useCombobox.stateChangeTypes.InputBlur:
-          if (isOpen) {
-            // Fixes open flash when tabbing past dropdown
-            return {
-              ...changes,
-              isOpen: true
-            } // Allows tabbing within dropdown
-          }
-          break
         default:
-          break
+          return changes
       }
-      return changes
     }
   })
 
-  const openClass = isOpen ? 'is-open' : ''
-
-  /**
-   * Uses Downshift's internal state to determine whether to render a done button or an icon.
-   *
-   * @returns
-   */
-  const renderToggleButton = () => {
-    if (isOpen && hasButton) {
-      return (
-        <div className='select-list__actions'>
-          {selectedItems.length === 0 ? (
-            <button
-              className='select-list__button--open btn btn-ghost-orange' // Had to do it this way, when checking isOpen above for some reason the buttons don't work
-              onClick={() => setSelectedItems(items)}
-            >
-              Select All
-            </button>
-          ) : (
-            <button
-              className='btn btn-ghost-orange select-list__button--open'
-              onClick={() => setSelectedItems([])}
-            >
-              Clear All
-            </button>
-          )}
-          <button
-            {...getToggleButtonProps()}
-            tabIndex={0}
-            className='select-list__button--open btn btn-primary'
-            {...getMenuProps()}
-          >
-            {buttonText}
-          </button>
-        </div>
-      )
-    }
-    if (!isOpen) {
-      return (
-        <span
-          className='select-list__dropdown-button'
-          {...getToggleButtonProps()}
-        >
-          Open
-        </span>
-      )
-    }
-
-    return ''
+  const handleSelectAll = () => setSelectedItems(items)
+  const handleClearAll = () => setSelectedItems([])
+  const handleDone = () => {
+    closeMenu()
   }
 
-  const handleMainWrapperBlur = (e) => {
-    const wrapperTarget = e.currentTarget
-
-    setTimeout(() => {
-      const focusedElement = document.activeElement
-      const isChildElementFocused = wrapperTarget.contains(focusedElement)
-      if (!isChildElementFocused) {
-        closeMenu() // Close menu if child element is not focused within wrapper element
-      } else {
-        setHighlightedIndex(-1)
-      }
-    }, 0)
-  }
-
-  const handleItemKeyboardEvent = (e, item) => {
-    const keyToLowerCase = e.key.toLowerCase()
-    const isProperKeyEvent =
-      keyToLowerCase === 'enter' ||
-      keyToLowerCase === 'spacebar' ||
-      keyToLowerCase === ' '
-
-    if (isProperKeyEvent) {
-      selectItem(item)
-    }
-  }
-
-  // Methods available to parent here
   useImperativeHandle(ref, () => ({
-    setSelectedItemsList(sentItems) {
-      setSelectedItems(sentItems)
-    },
-    setSelectedItemsListFromIds(sentItems) {
-      setSelectedItems(getNodeItemsFromIds(sentItems))
-    },
-    toggleItem(item) {
-      selectItem(item)
-    }
+    setSelected: (items) => setSelectedItems(items),
+    getSelected: () => selectedItems,
+    clearSelection: handleClearAll,
+    closeDropdown: closeMenu,
+    openDropdown: openMenu
   }))
 
-  const itemClass = (item) => {
-    return selectedItems &&
-      selectedItems.find((i) => i.props.id === item.props.id)
-      ? `is-active ${selectedItemClassList}`
-      : ''
-  }
-
   return (
-    <div ref={ref}>
-      <div
-        {...getComboboxProps()}
-        aria-label='select an option'
-        className={`select-list form-group ${classList}`}
-        onBlur={(e) => handleMainWrapperBlur(e)}
-        onKeyUp={(e) =>
-          !isOpen &&
-          (e.key.toLocaleLowerCase() === ' ' ||
-            e.key.toLocaleLowerCase() === 'space' ||
-            e.key.toLocaleLowerCase() === 'enter')
-            ? openMenu()
-            : null
-        }
-      >
-        <label
-          id='select-list-label'
-          className='select-list__label'
-          {...getLabelProps()}
-        >
+    <SelectWrapper className={className}>
+      {label && (
+        <Label {...getLabelProps()}>
           {label}
-        </label>
-        <div className='select-list__wrapper'>
-          <div
-            className={`select-list__toggle ${openClass}`}
-            onClick={() => (isEditable && !isOpen ? openMenu() : '')}
-            tabIndex={0}
-            role='input'
-            aria-labelledby='select-list-label'
-            {...getInputProps()}
-          >
-            <div className='select-list__selected-items' tabIndex={-1}>
-              {selectedItems.length >= 1 ? (
-                <div>
-                  <div>{selectedItems.length} selected</div>
-                  <em>
-                    {selectedItems.map((item) => item.props.content).join(', ')}
-                  </em>
-                </div>
-              ) : (
-                `0 selected`
-              )}
-            </div>
+        </Label>
+      )}
 
-            {renderToggleButton()}
-          </div>
+      <div {...getComboboxProps()}>
+        <SelectToggle 
+          className={isOpen ? 'is-open' : ''} 
+          onClick={() => isEditable && !isOpen && openMenu()}
+          {...getInputProps()}
+        >
+          <SelectedItems hasButton={hasButton}>
+            {selectedItems.length > 0 ? (
+              <>
+                <span className="count">{selectedItems.length} selected</span>
+                <span className="items">
+                  {selectedItems.map(item => item.label).join(', ')}
+                </span>
+              </>
+            ) : (
+              'Select items...'
+            )}
+          </SelectedItems>
 
-          <ul
-            className='select-list__items'
-            role='combobox'
-            tabIndex={-1}
-            {...getMenuProps()}
-            style={!isOpen ? { display: 'none' } : {}}
-          >
-            {isOpen &&
-              items.map((item, index) => (
-                <li
-                  className={`select-list__item ${itemClassList} ${itemClass(item)}`}
-                  tabIndex={0}
-                  onKeyUp={(e) => handleItemKeyboardEvent(e, item)}
-                  {...getItemProps({
-                    item,
-                    index,
-                    key: `${item.props.id}`,
-                    style: {
-                      backgroundColor:
-                        highlightedIndex === index ? '#d9f3f7' : ''
-                    }
-                  })}
-                >
-                  {item}
-                </li>
-              ))}
-          </ul>
-        </div>
+          {isOpen && hasButton && (
+            <ActionButtons>
+              <Button 
+                className="secondary"
+                onClick={selectedItems.length ? handleClearAll : handleSelectAll}
+              >
+                {selectedItems.length ? 'Clear All' : 'Select All'}
+              </Button>
+              <Button 
+                className="primary"
+                onClick={handleDone}
+                {...getToggleButtonProps()}
+              >
+                {buttonText}
+              </Button>
+            </ActionButtons>
+          )}
+        </SelectToggle>
+
+        <ItemsList {...getMenuProps()} style={!isOpen ? { display: 'none' } : {}}>
+          {isOpen && items.map((item, index) => (
+            <Item
+              key={item.id}
+              className={`
+                ${itemClassName}
+                ${selectedItems.some(selected => selected.id === item.id) ? `is-active ${selectedItemClassName}` : ''}
+                ${highlightedIndex === index ? 'is-highlighted' : ''}
+              `}
+              {...getItemProps({ item, index })}
+            >
+              {item.label}
+            </Item>
+          ))}
+        </ItemsList>
       </div>
-    </div>
+    </SelectWrapper>
   )
 })
 
-MultiSelect.defaultProps = {
-  classList: '',
-  itemClassList: '',
-  selectedItemClassList: '',
-  hasButton: true,
-  buttonText: 'Done',
-  isEditable: true,
-  initialIndex: -1,
-  sendItems() {},
-  initialSelectedItemList: []
-}
-
 MultiSelect.propTypes = {
-  children: PropTypes.node.isRequired,
-  label: PropTypes.string.isRequired,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      label: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  label: PropTypes.string,
   isEditable: PropTypes.bool,
   hasButton: PropTypes.bool,
-  classList: PropTypes.string,
   buttonText: PropTypes.string,
-  initialIndex: PropTypes.number,
-  itemClassList: PropTypes.string,
-  selectedItemClassList: PropTypes.string,
-  sendItems: PropTypes.func,
-  initialSelectedItemList: PropTypes.array,
-  updateSelectedItems: PropTypes.func.isRequired
+  className: PropTypes.string,
+  itemClassName: PropTypes.string,
+  selectedItemClassName: PropTypes.string,
+  onSelectionChange: PropTypes.func,
+  initialSelected: PropTypes.array,
+  disabled: PropTypes.bool,
+  closeOnSelect: PropTypes.bool
 }
 
 export default MultiSelect
