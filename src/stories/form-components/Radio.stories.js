@@ -24,7 +24,7 @@ export default meta
 // Template with state management for controlled radio
 const ControlledTemplate = (args) => {
   const [isChecked, setIsChecked] = React.useState(args.checked || false)
-  
+
   const handleChange = (e) => {
     setIsChecked(e.target.checked)
     args.onChange(e)

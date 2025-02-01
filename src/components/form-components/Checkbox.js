@@ -19,9 +19,9 @@ const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
 const StyledCheckbox = styled.div`
   width: 20px;
   height: 20px;
-  border: 2px solid ${props => props.error ? props.theme.colors.danger : props.theme.colors.gray[300]};
-  border-radius: ${props => props.theme.borderRadius.sm};
-  background: ${props => props.checked ? props.theme.colors.primary : 'white'};
+  border: 2px solid ${props => props.error ? '#dc3545' : '#dee2e6'};
+  border-radius: 0.25rem;
+  background: ${props => props.checked ? '#7162e8' : 'white'};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,7 +30,7 @@ const StyledCheckbox = styled.div`
   opacity: ${props => props.disabled ? 0.6 : 1};
 
   &:hover {
-    border-color: ${props => !props.disabled && props.theme.colors.primary};
+    border-color: ${props => !props.disabled && '#7162e8'};
   }
 
   ${props => props.customStyles}
@@ -38,15 +38,15 @@ const StyledCheckbox = styled.div`
 
 const Label = styled.label`
   margin-left: 0.75rem;
-  font-size: ${props => props.theme.typography.fontSizes.md};
-  color: ${props => props.error ? props.theme.colors.danger : props.theme.colors.gray[700]};
+  font-size: 1rem;
+  color: ${props => props.error ? '#dc3545' : '#495057'};
   cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
   opacity: ${props => props.disabled ? 0.6 : 1};
 `
 
 const ErrorMessage = styled.div`
-  color: ${props => props.theme.colors.danger};
-  font-size: ${props => props.theme.typography.fontSizes.sm};
+  color: #dc3545;
+  font-size: 0.875rem;
   margin-top: 0.25rem;
   margin-left: 2.75rem;
 `
@@ -61,7 +61,7 @@ const Checkbox = ({
   onChange,
   ...props
 }) => {
-  const handleChange = (e) => {
+  const handleChange = (_e) => {
     if (!disabled && onChange) {
       onChange({ target: { checked: !checked, name: props.name } })
     }
@@ -86,8 +86,8 @@ const Checkbox = ({
           aria-checked={checked}
         />
         {label && (
-          <Label 
-            error={error} 
+          <Label
+            error={error}
             disabled={disabled}
             onClick={handleChange}
           >
@@ -112,4 +112,4 @@ Checkbox.propTypes = {
   name: PropTypes.string
 }
 
-export default Checkbox 
+export default Checkbox

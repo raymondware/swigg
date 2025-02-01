@@ -70,4 +70,4 @@ CustomStyles.args = {
       box-shadow: 0 0 0 3px rgba(113, 98, 232, 0.2);
     }
   `
-} 
+}

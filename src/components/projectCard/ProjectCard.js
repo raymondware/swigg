@@ -21,14 +21,16 @@ position: relative;
 font-family: "helvetica", arial, sans-serif;
 transition: all .5s;
 
-${props => props.animation ? `&:hover {
+${props => props.animation
+? `&:hover {
     cursor: pointer;
     transform: scale(1.05) translateY(-5px);
 
     h2 {
       color: #000;
     }
-  }` : ''}
+  }`
+: ''}
 
   ${props => props?.customStyles ? props.customStyles : ''}
 `
@@ -102,7 +104,7 @@ const OverlayContainer = styled.div`
     }
 `
 
-const Overlay = ({bg, opacityVal, display, mediaDisplay}) => (<OverlayContainer bg={bg} opacityVal={opacityVal} display={display} mediaDisplay={mediaDisplay} />)
+const Overlay = ({ bg, opacityVal, display, mediaDisplay }) => (<OverlayContainer bg={bg} opacityVal={opacityVal} display={display} mediaDisplay={mediaDisplay} />)
 
 // TODO: Add href and aria if there is a link
 const ProjectCard = props => (

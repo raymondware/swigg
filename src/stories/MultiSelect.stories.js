@@ -117,4 +117,4 @@ CloseOnSelect.args = {
   label: 'Select One at a Time',
   closeOnSelect: true,
   onSelectionChange: fn()
-} 
+}

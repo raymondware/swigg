@@ -1,12 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const GridWrapper = styled.div`
     box-sizing: border-box;
     width: 100%;
     margin: 0 auto;
     background: ${props => props.bg || 'transparent'};
-    padding: ${props => props.padding || "25px"};
+    padding: ${props => props.padding || '25px'};
     display: grid;
     grid-gap: ${props => props.spacing || '15px'};
     grid-template-columns: repeat(auto-fill, minmax(${props => props.colSize || '250px'}, 1fr));
@@ -40,6 +41,18 @@ const Gallery = ({ items, padding, colSize, bg, spacing }) => {
       }) }
     </GridWrapper>
   )
+}
+
+Gallery.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      image: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  padding: PropTypes.string,
+  colSize: PropTypes.string,
+  bg: PropTypes.string,
+  spacing: PropTypes.string
 }
 
 export default Gallery

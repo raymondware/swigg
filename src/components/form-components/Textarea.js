@@ -12,23 +12,25 @@ const StyledTextarea = styled.textarea`
   width: 100%;
   min-height: ${props => props.minHeight || '100px'};
   padding: 0.75rem 1rem;
-  border: 2px solid ${props => props.error ? props.theme.colors.danger : props.theme.colors.gray[300]};
-  border-radius: ${props => props.theme.borderRadius.md};
-  font-size: ${props => props.theme.typography.fontSizes.md};
+  border: 2px solid ${props =>
+    props.error ? '#dc3545' : '#dee2e6'
+  };
+  border-radius: 0.375rem;
+  font-size: 1rem;
   font-family: inherit;
   line-height: 1.5;
   transition: all 0.2s ease;
   resize: ${props => props.resize || 'vertical'};
-  background: ${props => props.disabled ? props.theme.colors.gray[100] : 'white'};
+  background: ${props => props.disabled ? '#f8f9fa' : 'white'};
   
   &:focus {
     outline: none;
-    border-color: ${props => props.theme.colors.primary};
-    box-shadow: 0 0 0 3px ${props => props.theme.colors.primary}33;
+    border-color: #7162e8;
+    box-shadow: 0 0 0 3px rgba(113, 98, 232, 0.2);
   }
   
   &::placeholder {
-    color: ${props => props.theme.colors.gray[400]};
+    color: #ced4da;
   }
   
   &:disabled {
@@ -41,13 +43,13 @@ const StyledTextarea = styled.textarea`
 const Label = styled.label`
   display: block;
   margin-bottom: 0.5rem;
-  font-weight: ${props => props.theme.typography.fontWeights.medium};
-  color: ${props => props.error ? props.theme.colors.danger : props.theme.colors.gray[700]};
+  font-weight: 500;
+  color: ${props => props.error ? '#dc3545' : '#495057'};
 `
 
 const ErrorMessage = styled.div`
-  color: ${props => props.theme.colors.danger};
-  font-size: ${props => props.theme.typography.fontSizes.sm};
+  color: #dc3545;
+  font-size: 0.875rem;
   margin-top: 0.25rem;
 `
 
@@ -87,4 +89,4 @@ Textarea.propTypes = {
   placeholder: PropTypes.string
 }
 
-export default Textarea 
+export default Textarea

@@ -1,13 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import Skeleton from './Skeleton';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
+import Skeleton from './Skeleton'
 
 const Container = styled.div`
   width: ${props => props.width};
   padding: ${props => props.padding};
   ${props => props.customStyles}
-`;
+`
 
 export const ProductSkeleton = ({ width = '300px', padding = '20px' }) => (
   <Container width={width} padding={padding}>
@@ -32,7 +32,7 @@ export const ProductSkeleton = ({ width = '300px', padding = '20px' }) => (
       height="40px"
     />
   </Container>
-);
+)
 
 export const CardSkeleton = ({ width = '300px', padding = '20px' }) => (
   <Container
@@ -61,7 +61,7 @@ export const CardSkeleton = ({ width = '300px', padding = '20px' }) => (
       height="16px"
     />
   </Container>
-);
+)
 
 export const BlogPostSkeleton = ({ width = '600px', padding = '20px' }) => (
   <Container width={width} padding={padding}>
@@ -92,7 +92,7 @@ export const BlogPostSkeleton = ({ width = '600px', padding = '20px' }) => (
       margin="0 0 20px 0"
     />
   </Container>
-);
+)
 
 export const CartItemSkeleton = ({ width = '100%', padding = '15px' }) => (
   <Container
@@ -118,7 +118,7 @@ export const CartItemSkeleton = ({ width = '100%', padding = '15px' }) => (
       />
     </div>
   </Container>
-);
+)
 
 export const ProfileSkeleton = ({ width = '300px', padding = '20px' }) => (
   <Container width={width} padding={padding}>
@@ -155,15 +155,15 @@ export const ProfileSkeleton = ({ width = '300px', padding = '20px' }) => (
       height="16px"
     />
   </Container>
-);
+)
 
 const templatePropTypes = {
   width: PropTypes.string,
-  padding: PropTypes.string,
-};
+  padding: PropTypes.string
+}
 
-ProductSkeleton.propTypes = templatePropTypes;
-CardSkeleton.propTypes = templatePropTypes;
-BlogPostSkeleton.propTypes = templatePropTypes;
-CartItemSkeleton.propTypes = templatePropTypes;
-ProfileSkeleton.propTypes = templatePropTypes;
+ProductSkeleton.propTypes = templatePropTypes
+CardSkeleton.propTypes = templatePropTypes
+BlogPostSkeleton.propTypes = templatePropTypes
+CartItemSkeleton.propTypes = templatePropTypes
+ProfileSkeleton.propTypes = templatePropTypes

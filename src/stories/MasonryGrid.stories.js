@@ -1,5 +1,5 @@
-import React from 'react';
-import { MasonryGrid } from '../components';
+import React from 'react'
+import { MasonryGrid } from '../components'
 
 const meta = {
   title: 'Components/MasonryGrid',
@@ -23,11 +23,11 @@ const meta = {
       description: 'Show loading skeleton state'
     }
   }
-};
+}
 
-export default meta;
+export default meta
 
-const Template = args => <MasonryGrid {...args} />;
+const Template = args => <MasonryGrid {...args} />
 
 // Sample items for the stories
 const sampleItems = [
@@ -61,17 +61,17 @@ const sampleItems = [
     alt: 'Sample image 6',
     aspectRatio: '87.5%'
   }
-];
+]
 
-export const Default = Template.bind({});
+export const Default = Template.bind({})
 Default.args = {
   items: sampleItems,
   padding: '25px',
   spacing: '15px',
   columns: 3
-};
+}
 
-export const WithContent = Template.bind({});
+export const WithContent = Template.bind({})
 WithContent.args = {
   items: sampleItems,
   padding: '25px',
@@ -83,9 +83,9 @@ WithContent.args = {
       <p>Some description text for this image</p>
     </div>
   )
-};
+}
 
-export const CustomStyling = Template.bind({});
+export const CustomStyling = Template.bind({})
 CustomStyling.args = {
   items: sampleItems,
   padding: '25px',
@@ -97,18 +97,18 @@ CustomStyling.args = {
   customStyles: `
     box-shadow: 0 0 20px rgba(0,0,0,0.1);
   `
-};
+}
 
-export const LoadingState = Template.bind({});
+export const LoadingState = Template.bind({})
 LoadingState.args = {
   items: sampleItems,
   loading: true,
   padding: '25px',
   spacing: '15px',
   columns: 3
-};
+}
 
-export const NoEffects = Template.bind({});
+export const NoEffects = Template.bind({})
 NoEffects.args = {
   items: sampleItems,
   hoverEffect: false,
@@ -116,4 +116,4 @@ NoEffects.args = {
   padding: '25px',
   spacing: '15px',
   columns: 3
-};
+}

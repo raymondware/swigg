@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled, { keyframes } from 'styled-components';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled, { keyframes } from 'styled-components'
 
 const shimmer = keyframes`
   0% {
@@ -9,7 +9,7 @@ const shimmer = keyframes`
   100% {
     background-position: 1000px 0;
   }
-`;
+`
 
 const SkeletonBase = styled.div`
   width: ${props => props.width};
@@ -33,7 +33,7 @@ const SkeletonBase = styled.div`
   `}
 
   ${props => props.customStyles}
-`;
+`
 
 const Skeleton = ({
   width = '100%',
@@ -51,17 +51,18 @@ const Skeleton = ({
     <SkeletonBase
       width={width}
       height={height}
-      borderRadius={borderRadius}
+      borderRadius={circle ? '50%' : borderRadius}
       margin={margin}
       baseColor={baseColor}
       highlightColor={highlightColor}
       opacity={opacity}
       circle={circle}
       customStyles={customStyles}
+      data-testid="skeleton"
       {...props}
     />
-  );
-};
+  )
+}
 
 Skeleton.propTypes = {
   /** Width of the skeleton */
@@ -81,9 +82,9 @@ Skeleton.propTypes = {
   /** Whether the skeleton should be a circle */
   circle: PropTypes.bool,
   /** Custom CSS styles */
-  customStyles: PropTypes.string,
-};
+  customStyles: PropTypes.string
+}
 
-Skeleton.displayName = 'Skeleton';
+Skeleton.displayName = 'Skeleton'
 
-export default Skeleton;
+export default Skeleton

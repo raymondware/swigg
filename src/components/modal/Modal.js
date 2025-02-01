@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
 const Overlay = styled.div`
   position: fixed;
@@ -16,7 +16,7 @@ const Overlay = styled.div`
   opacity: ${props => props.isOpen ? 1 : 0};
   visibility: ${props => props.isOpen ? 'visible' : 'hidden'};
   transition: all 0.3s ease;
-`;
+`
 
 const ModalContainer = styled.div`
   background: white;
@@ -28,7 +28,7 @@ const ModalContainer = styled.div`
   transition: transform 0.3s ease;
   position: relative;
   ${props => props.customStyles}
-`;
+`
 
 const CloseButton = styled.button`
   position: absolute;
@@ -44,7 +44,7 @@ const CloseButton = styled.button`
   &:hover {
     opacity: 1;
   }
-`;
+`
 
 const Modal = ({
   isOpen,
@@ -53,20 +53,27 @@ const Modal = ({
   maxWidth,
   showCloseButton = true,
   customStyles = '',
-  closeOnOverlayClick = true
+  closeOnOverlayClick = true,
+  ...props
 }) => {
   const handleOverlayClick = (e) => {
     if (closeOnOverlayClick && e.target === e.currentTarget) {
-      onClose();
+      onClose()
     }
-  };
+  }
 
   return (
-    <Overlay isOpen={isOpen} onClick={handleOverlayClick}>
-      <ModalContainer 
-        isOpen={isOpen} 
+    <Overlay
+      isOpen={isOpen}
+      onClick={handleOverlayClick}
+      data-testid={props['data-testid'] || 'modal-overlay'}
+    >
+      <ModalContainer
+        isOpen={isOpen}
         maxWidth={maxWidth}
         customStyles={customStyles}
+        role="dialog"
+        aria-modal="true"
       >
         {showCloseButton && (
           <CloseButton onClick={onClose} aria-label="Close modal">
@@ -76,8 +83,8 @@ const Modal = ({
         {children}
       </ModalContainer>
     </Overlay>
-  );
-};
+  )
+}
 
 Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
@@ -86,7 +93,8 @@ Modal.propTypes = {
   maxWidth: PropTypes.string,
   showCloseButton: PropTypes.bool,
   customStyles: PropTypes.string,
-  closeOnOverlayClick: PropTypes.bool
-};
+  closeOnOverlayClick: PropTypes.bool,
+  'data-testid': PropTypes.string
+}
 
-export default Modal; 
+export default Modal

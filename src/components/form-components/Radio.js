@@ -19,7 +19,7 @@ const HiddenRadio = styled.input.attrs({ type: 'radio' })`
 const StyledRadio = styled.div`
   width: 20px;
   height: 20px;
-  border: 2px solid ${props => props.error ? props.theme.colors.danger : props.theme.colors.gray[300]};
+  border: 2px solid ${props => props.error ? '#dc3545' : '#dee2e6'};
   border-radius: 50%;
   background: white;
   display: flex;
@@ -30,7 +30,7 @@ const StyledRadio = styled.div`
   opacity: ${props => props.disabled ? 0.6 : 1};
 
   &:hover {
-    border-color: ${props => !props.disabled && props.theme.colors.primary};
+    border-color: ${props => !props.disabled && '#7162e8'};
   }
 
   &:after {
@@ -38,7 +38,7 @@ const StyledRadio = styled.div`
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: ${props => props.theme.colors.primary};
+    background: #7162e8;
     opacity: ${props => props.checked ? 1 : 0};
     transform: scale(${props => props.checked ? 1 : 0});
     transition: all 0.2s ease;
@@ -49,8 +49,8 @@ const StyledRadio = styled.div`
 
 const Label = styled.label`
   margin-left: 0.75rem;
-  font-size: ${props => props.theme.typography.fontSizes.md};
-  color: ${props => props.error ? props.theme.colors.danger : props.theme.colors.gray[700]};
+  font-size: 1rem;
+  color: ${props => props.error ? '#dc3545' : '#495057'};
   cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
   opacity: ${props => props.disabled ? 0.6 : 1};
 `
@@ -65,9 +65,8 @@ const Radio = ({
   onChange,
   ...props
 }) => {
-  const handleChange = (e) => {
+  const handleChange = (_e) => {
     if (!disabled && onChange) {
-      // If already checked and toggleable, uncheck
       if (checked) {
         onChange({ target: { checked: false, name: props.name, value: props.value } })
       } else {
@@ -94,8 +93,8 @@ const Radio = ({
         aria-checked={checked}
       />
       {label && (
-        <Label 
-          error={error} 
+        <Label
+          error={error}
           disabled={disabled}
           onClick={handleChange}
         >
@@ -119,4 +118,4 @@ Radio.propTypes = {
   required: PropTypes.bool
 }
 
-export default Radio 
+export default Radio

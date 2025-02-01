@@ -17,28 +17,28 @@ const GlobalStyles = createGlobalStyle`
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
       Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
     line-height: 1.5;
-    color: ${props => props.theme.colors.dark};
+    color: #343a40;
   }
 
   h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0.5em;
-    line-height: ${props => props.theme.typography.lineHeights.tight};
-    font-weight: ${props => props.theme.typography.fontWeights.semibold};
+    line-height: 1.2;
+    font-weight: 700;
   }
 
-  h1 { font-size: ${props => props.theme.typography.fontSizes.xxl} }
-  h2 { font-size: calc(${props => props.theme.typography.fontSizes.xxl} * 0.85) }
-  h3 { font-size: calc(${props => props.theme.typography.fontSizes.xxl} * 0.75) }
-  h4 { font-size: ${props => props.theme.typography.fontSizes.xl} }
-  h5 { font-size: ${props => props.theme.typography.fontSizes.lg} }
-  h6 { font-size: ${props => props.theme.typography.fontSizes.md} }
+  h1 { font-size: 2.5rem }
+  h2 { font-size: 2rem }
+  h3 { font-size: 1.75rem }
+  h4 { font-size: 1.5rem }
+  h5 { font-size: 1.25rem }
+  h6 { font-size: 1rem }
 
   p {
-    margin-bottom: ${props => props.theme.spacing.md};
+    margin-bottom: 1rem;
   }
 
   a {
-    color: ${props => props.theme.colors.primary};
+    color: #000;
     text-decoration: none;
     
     &:hover {
@@ -61,4 +61,4 @@ const GlobalStyles = createGlobalStyle`
   .text-left { text-align: left }
 `
 
-export default GlobalStyles 
+export default GlobalStyles

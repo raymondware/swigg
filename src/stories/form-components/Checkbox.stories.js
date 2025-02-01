@@ -24,7 +24,7 @@ export default meta
 // Template with state management for controlled checkbox
 const ControlledTemplate = (args) => {
   const [isChecked, setIsChecked] = React.useState(args.checked || false)
-  
+
   const handleChange = (e) => {
     setIsChecked(e.target.checked)
     args.onChange(e)
@@ -74,8 +74,8 @@ export const CheckboxGroup = () => {
 
   const handleChange = (e) => {
     const { checked, name } = e.target
-    setSelected(prev => 
-      checked 
+    setSelected(prev =>
+      checked
         ? [...prev, name]
         : prev.filter(item => item !== name)
     )
@@ -109,4 +109,4 @@ export const CheckboxGroup = () => {
       />
     </FormGroup>
   )
-} 
+}

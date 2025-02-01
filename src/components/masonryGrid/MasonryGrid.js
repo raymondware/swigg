@@ -119,7 +119,7 @@ const MasonryGrid = ({
       <GridWrapper padding={padding} spacing={spacing} columns={columns} bg={bg}>
         {Array.from({ length: 6 }).map((_, index) => (
           <Item key={index} spacing={spacing}>
-            <Skeleton 
+            <Skeleton
               height="300px"
               borderRadius={borderRadius || '7px'}
             />
@@ -154,7 +154,7 @@ const MasonryGrid = ({
             placeholderColor={placeholderColor}
           >
             {!loadedImages.includes(index) && (
-              <Skeleton 
+              <Skeleton
                 height="100%"
                 borderRadius={borderRadius || '7px'}
               />

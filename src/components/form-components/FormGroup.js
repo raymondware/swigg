@@ -4,17 +4,18 @@ import styled from 'styled-components'
 
 const GroupWrapper = styled.div`
   margin-bottom: ${props => props.marginBottom || '1.5rem'};
+  ${props => props.customStyles}
 `
 
 const Legend = styled.div`
-  font-weight: ${props => props.theme.typography.fontWeights.medium};
-  color: ${props => props.error ? props.theme.colors.danger : props.theme.colors.gray[700]};
+  font-weight: 500;
+  color: ${props => props.error ? '#dc3545' : '#495057'};
   margin-bottom: 0.75rem;
 `
 
 const ErrorMessage = styled.div`
-  color: ${props => props.theme.colors.danger};
-  font-size: ${props => props.theme.typography.fontSizes.sm};
+  color: #dc3545;
+  font-size: 0.875rem;
   margin-top: 0.5rem;
 `
 
@@ -26,7 +27,7 @@ const FormGroup = ({
   customStyles
 }) => {
   return (
-    <GroupWrapper marginBottom={marginBottom} style={customStyles}>
+    <GroupWrapper marginBottom={marginBottom} customStyles={customStyles}>
       {legend && <Legend error={error}>{legend}</Legend>}
       {children}
       {error && <ErrorMessage>{error}</ErrorMessage>}
@@ -39,7 +40,7 @@ FormGroup.propTypes = {
   error: PropTypes.string,
   marginBottom: PropTypes.string,
   children: PropTypes.node.isRequired,
-  customStyles: PropTypes.object
+  customStyles: PropTypes.string
 }
 
-export default FormGroup 
+export default FormGroup

@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const GridArea = styled.div`
     padding: ${props => props.padding || '25px'};
@@ -23,7 +24,12 @@ const AutoGrid = props => {
   )
 }
 
-AutoGrid.displayName = 'AutoGrid';
+AutoGrid.displayName = 'AutoGrid'
+
+AutoGrid.propTypes = {
+  children: PropTypes.node.isRequired
+  // ... other prop types
+}
 
 // TODO: Prop type validation
 

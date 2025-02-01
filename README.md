@@ -183,3 +183,7 @@ Available skeleton templates:
 ## License
 
 MIT © [raymondware](https://github.com/raymondware)
+
+## Setup
+
+Wrap your app with the ThemeProvider:

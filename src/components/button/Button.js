@@ -1,85 +1,69 @@
 import React from 'react'
-import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
-import { lightenDarkenColor } from './utils'
+import styled from 'styled-components'
 
-const buttonStyles = css`
-  width: 100%;
-  max-width: 300px;
-  padding: ${props => props.theme.spacing.md} ${props => props.theme.spacing.sm};
-  margin: 0 auto;
-  text-align: center;
-  box-sizing: border-box;
-  border-radius: ${props => props.theme.borderRadius.full};
-  font-size: ${props => props.theme.typography.fontSizes.md};
-  font-weight: ${props => props.theme.typography.fontWeights.bold};
-  transition: all 0.3s ease;
-  cursor: pointer;
-  line-height: ${props => props.theme.typography.lineHeights.normal};
-  
-  &:focus {
-    outline: none;
-  }
-`
-
-const PrimaryButton = styled.button`
-  ${buttonStyles}
-  background: ${props => props.bgOverlay || props.theme.colors.primary};
-  color: ${props => props.theme.colors.white};
+const StyledButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
   border: none;
-  box-shadow: ${props => props.theme.shadows.sm};
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: ${props => props.bgOverlay || (props.variant === 'secondary' ? 'rgba(113, 98, 232, 0.1)' : '#7162e8')};
+  color: ${props => props.variant === 'secondary' ? '#7162e8' : 'white'};
+  border: ${props => props.variant === 'secondary' ? '2px solid #7162e8' : 'none'};
 
   &:hover {
-    background-color: ${props => 
-      props.bgOverlay
-        ? lightenDarkenColor(props.bgOverlay, -20)
-        : lightenDarkenColor(props.theme.colors.primary, -20)
-    };
-    box-shadow: ${props => props.theme.shadows.md};
+    opacity: 0.85;
+    transform: translateY(-1px);
   }
 
-  &:focus {
-    box-shadow: 0 0 0 3px ${props => props.theme.colors.primary}33;
+  &:active {
+    transform: translateY(0);
   }
 
-  ${props => props?.customStyles}
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  ${props => props.customStyles}
 `
 
-const SecondaryButton = styled.button`
-  ${buttonStyles}
-  background: ${props => props.theme.colors.white};
-  color: ${props => props.theme.colors.primary};
-  border: 2px solid ${props => props.theme.colors.primary};
-
-  &:hover {
-    background: ${props => props.theme.colors.primary}11;
-    border-color: ${props => lightenDarkenColor(props.theme.colors.primary, -20)};
-    color: ${props => lightenDarkenColor(props.theme.colors.primary, -20)};
-  }
-
-  &:focus {
-    box-shadow: 0 0 0 3px ${props => props.theme.colors.primary}33;
-  }
-
-  ${props => props?.customStyles}
-`
-
-const Button = ({ variant = 'primary', ...props }) => {
-  switch (variant) {
-    case 'secondary':
-      return <SecondaryButton {...props} />
-    default:
-      return <PrimaryButton {...props} />
-  }
+const Button = ({
+  children,
+  variant = 'primary',
+  bgOverlay,
+  customStyles,
+  ...props
+}) => {
+  return (
+    <StyledButton
+      variant={variant}
+      bgOverlay={bgOverlay}
+      customStyles={customStyles}
+      {...props}
+    >
+      {children}
+    </StyledButton>
+  )
 }
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
   variant: PropTypes.oneOf(['primary', 'secondary']),
   bgOverlay: PropTypes.string,
-  customStyles: PropTypes.string
+  customStyles: PropTypes.string,
+  onClick: PropTypes.func,
+  disabled: PropTypes.bool,
+  type: PropTypes.string
 }
-
-Button.displayName = 'Button'
 
 export default Button

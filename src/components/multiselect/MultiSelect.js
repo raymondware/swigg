@@ -12,8 +12,8 @@ const SelectWrapper = styled.div`
 const Label = styled.label`
   display: block;
   margin-bottom: 0.5rem;
-  font-weight: ${props => props.theme.typography.fontWeights.medium};
-  color: ${props => props.theme.colors.gray[700]};
+  font-weight: 500;
+  color: #495057;
 `
 
 const SelectToggle = styled.div`
@@ -21,19 +21,19 @@ const SelectToggle = styled.div`
   width: 100%;
   min-height: 45px;
   padding: 0.75rem 1rem;
-  border: 2px solid ${props => props.theme.colors.gray[300]};
-  border-radius: ${props => props.theme.borderRadius.md};
+  border: 2px solid #e9ecef;
+  border-radius: 7px;
   background: white;
   cursor: pointer;
   transition: all 0.2s ease;
 
   &:hover {
-    border-color: ${props => props.theme.colors.gray[400]};
+    border-color: #e9ecef;
   }
 
   &.is-open {
-    border-color: ${props => props.theme.colors.primary};
-    box-shadow: 0 0 0 3px ${props => props.theme.colors.primary}33;
+    border-color: #000;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
   }
 `
 
@@ -44,12 +44,12 @@ const SelectedItems = styled.div`
   padding-right: ${props => props.hasButton ? '120px' : '30px'};
 
   .count {
-    font-weight: ${props => props.theme.typography.fontWeights.medium};
+    font-weight: 500;
     margin-right: 0.5rem;
   }
 
   .items {
-    color: ${props => props.theme.colors.gray[600]};
+    color: #6c757d;
   }
 `
 
@@ -65,27 +65,27 @@ const ActionButtons = styled.div`
 const Button = styled.button`
   padding: 0.5rem 1rem;
   border: none;
-  border-radius: ${props => props.theme.borderRadius.sm};
-  font-size: ${props => props.theme.typography.fontSizes.sm};
-  font-weight: ${props => props.theme.typography.fontWeights.medium};
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
 
   &.primary {
-    background: ${props => props.theme.colors.primary};
+    background: #7162e8;
     color: white;
 
     &:hover {
-      background: ${props => props.theme.colors.primary}dd;
+      background: rgba(113, 98, 232, 0.85);
     }
   }
 
   &.secondary {
-    background: ${props => props.theme.colors.gray[200]};
-    color: ${props => props.theme.colors.gray[700]};
+    background: #e9ecef;
+    color: #495057;
 
     &:hover {
-      background: ${props => props.theme.colors.gray[300]};
+      background: #dee2e6;
     }
   }
 `
@@ -97,8 +97,8 @@ const ItemsList = styled.ul`
   overflow-y: auto;
   margin-top: 0.5rem;
   padding: 0.5rem;
-  border: 1px solid ${props => props.theme.colors.gray[200]};
-  border-radius: ${props => props.theme.borderRadius.md};
+  border: 1px solid #e9ecef;
+  border-radius: 0.5rem;
   background: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   z-index: 1000;
@@ -106,21 +106,21 @@ const ItemsList = styled.ul`
 
 const Item = styled.li`
   padding: 0.75rem 1rem;
-  border-radius: ${props => props.theme.borderRadius.sm};
+  border-radius: 0.25rem;
   cursor: pointer;
   transition: all 0.2s ease;
 
   &:hover {
-    background: ${props => props.theme.colors.gray[100]};
+    background: #f8f9fa;
   }
 
   &.is-active {
-    background: ${props => props.theme.colors.primary}11;
-    color: ${props => props.theme.colors.primary};
+    background: rgba(113, 98, 232, 0.1);
+    color: #7162e8;
   }
 
   &.is-highlighted {
-    background: ${props => props.theme.colors.gray[100]};
+    background: #f8f9fa;
   }
 `
 
@@ -136,14 +136,14 @@ const MultiSelect = forwardRef(({
   selectedItemClassName = '',
   onSelectionChange = () => {},
   initialSelected = [],
-  disabled = false,
-  closeOnSelect = false
+  closeOnSelect = false,
+  disabled = false
 }, ref) => {
   const [selectedItems, setSelectedItems] = useState(initialSelected)
 
   useEffect(() => {
     onSelectionChange(selectedItems)
-  }, [selectedItems])
+  }, [selectedItems, onSelectionChange])
 
   const {
     isOpen,
@@ -155,12 +155,11 @@ const MultiSelect = forwardRef(({
     highlightedIndex,
     getItemProps,
     openMenu,
-    closeMenu,
-    setHighlightedIndex
+    closeMenu
   } = useCombobox({
     items,
     onSelectedItemChange: ({ selectedItem }) => {
-      if (!selectedItem) return
+      if (!selectedItem || disabled) return
 
       setSelectedItems(prev => {
         const isSelected = prev.some(item => item.id === selectedItem.id)
@@ -176,9 +175,7 @@ const MultiSelect = forwardRef(({
         case useCombobox.stateChangeTypes.ItemClick:
           return {
             ...changes,
-            // Keep the menu open unless closeOnSelect is true
             isOpen: !closeOnSelect,
-            // Maintain highlight on the selected item
             highlightedIndex: state.highlightedIndex
           }
         default:
@@ -187,11 +184,9 @@ const MultiSelect = forwardRef(({
     }
   })
 
-  const handleSelectAll = () => setSelectedItems(items)
-  const handleClearAll = () => setSelectedItems([])
-  const handleDone = () => {
-    closeMenu()
-  }
+  const handleSelectAll = () => !disabled && setSelectedItems(items)
+  const handleClearAll = () => !disabled && setSelectedItems([])
+  const handleDone = () => !disabled && closeMenu()
 
   useImperativeHandle(ref, () => ({
     setSelected: (items) => setSelectedItems(items),
@@ -209,36 +204,41 @@ const MultiSelect = forwardRef(({
         </Label>
       )}
 
-      <div {...getComboboxProps()}>
-        <SelectToggle 
-          className={isOpen ? 'is-open' : ''} 
-          onClick={() => isEditable && !isOpen && openMenu()}
+      <div {...getComboboxProps()} aria-disabled={disabled}>
+        <SelectToggle
+          className={isOpen ? 'is-open' : ''}
+          onClick={() => isEditable && !disabled && !isOpen && openMenu()}
           {...getInputProps()}
+          style={{ pointerEvents: disabled ? 'none' : 'auto', opacity: disabled ? 0.6 : 1 }}
         >
           <SelectedItems hasButton={hasButton}>
-            {selectedItems.length > 0 ? (
+            {selectedItems.length > 0
+              ? (
               <>
                 <span className="count">{selectedItems.length} selected</span>
                 <span className="items">
                   {selectedItems.map(item => item.label).join(', ')}
                 </span>
               </>
-            ) : (
-              'Select items...'
-            )}
+                )
+              : (
+                  'Select items...'
+                )}
           </SelectedItems>
 
           {isOpen && hasButton && (
             <ActionButtons>
-              <Button 
+              <Button
                 className="secondary"
                 onClick={selectedItems.length ? handleClearAll : handleSelectAll}
+                disabled={disabled}
               >
                 {selectedItems.length ? 'Clear All' : 'Select All'}
               </Button>
-              <Button 
+              <Button
                 className="primary"
                 onClick={handleDone}
+                disabled={disabled}
                 {...getToggleButtonProps()}
               >
                 {buttonText}
@@ -247,7 +247,7 @@ const MultiSelect = forwardRef(({
           )}
         </SelectToggle>
 
-        <ItemsList {...getMenuProps()} style={!isOpen ? { display: 'none' } : {}}>
+        <ItemsList {...getMenuProps()} style={{ display: isOpen ? 'block' : 'none' }}>
           {isOpen && items.map((item, index) => (
             <Item
               key={item.id}
@@ -283,8 +283,10 @@ MultiSelect.propTypes = {
   selectedItemClassName: PropTypes.string,
   onSelectionChange: PropTypes.func,
   initialSelected: PropTypes.array,
-  disabled: PropTypes.bool,
-  closeOnSelect: PropTypes.bool
+  closeOnSelect: PropTypes.bool,
+  disabled: PropTypes.bool
 }
+
+MultiSelect.displayName = 'MultiSelect'
 
 export default MultiSelect

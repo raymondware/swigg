@@ -74,7 +74,7 @@ NoCloseButton.args = {
   children: (
     <div>
       <h2>No Close Button</h2>
-      <p>This modal doesn't show the close button in the corner.</p>
+      <p>This modal doesn&apos;t show the close button in the corner.</p>
     </div>
   )
 }
@@ -97,12 +97,12 @@ CustomStyles.args = {
 // Example of a form in a modal
 export const FormModal = () => {
   const [isOpen, setIsOpen] = useState(false)
-  
+
   return (
     <div>
       <Button onClick={() => setIsOpen(true)}>Open Form Modal</Button>
-      <Modal 
-        isOpen={isOpen} 
+      <Modal
+        isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         maxWidth="400px"
       >
@@ -134,4 +134,4 @@ export const FormModal = () => {
       </Modal>
     </div>
   )
-} 
+}

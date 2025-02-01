@@ -1,3 +1,14 @@
+// Form Components
+export {
+  Input,
+  Select,
+  Checkbox,
+  Radio,
+  Textarea,
+  FormGroup
+} from './form-components'
+
+// Individual Components
 export { default as Button } from './button'
 export { default as ProjectCard } from './projectCard'
 export { default as AutoGrid } from './autoGrid'
