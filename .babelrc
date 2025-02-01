@@ -3,5 +3,9 @@
     "@babel/preset-env",
     "@babel/preset-react"
   ],
-  "plugins": ["babel-plugin-styled-components", "macros"]
+  "plugins": [
+    "babel-plugin-styled-components",
+    "babel-plugin-macros"
+  ],
+  "sourceMap": true
 }
