@@ -1,45 +1,53 @@
+import React from 'react';
 import { fn } from '@storybook/test';
-import { Button } from '../components/button';
+import { Button } from '../components';
 
-export default {
-  title: 'Components/button',
+const meta = {
+  title: 'Components/Button',
   component: Button,
-  parameters: {
-    layout: 'centered',
-  },
   tags: ['autodocs'],
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
 };
 
-export const Primary = {
-  args: {
-    primary: true,
-    label: 'Button',
-    onClick: fn(),
-  },
+export default meta;
+
+const Template = args => <Button {...args} />;
+
+export const Default = Template.bind({});
+Default.args = {
+  children: 'Default Button',
 };
 
-export const Secondary = {
-  args: {
-    label: 'Button',
-    onClick: fn(),
-  },
+export const CustomBackground = Template.bind({});
+CustomBackground.args = {
+  children: 'Custom Background',
+  bgOverlay: '#1ea7fd',
 };
 
-export const Large = {
-  args: {
-    size: 'large',
-    label: 'Button',
-    onClick: fn(),
-  },
+export const CustomMaxWidth = Template.bind({});
+CustomMaxWidth.args = {
+  children: 'Custom Max Width',
+  customStyles: 'max-width: 200px;',
 };
 
-export const Small = {
-  args: {
-    size: 'small',
-    label: 'Button',
-    onClick: fn(),
-  },
+export const FullWidth = Template.bind({});
+FullWidth.args = {
+  children: 'Full Width Button',
+  customStyles: 'max-width: 100%;',
+};
+
+export const WithHoverStyles = Template.bind({});
+WithHoverStyles.args = {
+  children: 'Hover Me',
+  customStyles: `
+    &:hover {
+      background: #333;
+      color: white;
+    }
+  `,
+};
+
+export const Interactive = Template.bind({});
+Interactive.args = {
+  children: 'Click Me',
+  onClick: fn(),
 };
