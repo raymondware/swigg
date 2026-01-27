@@ -57,12 +57,12 @@ When converting a component to TypeScript:
 
 ### Completed ✅
 - [x] Skeleton
+- [x] Button (with ButtonProps, ButtonVariant types)
+- [x] Input (with InputProps type)
+- [x] Select (with SelectProps, SelectOption types)
+- [x] Textarea (with TextareaProps, TextareaResize types)
 
 ### In Progress 🔄
-- [ ] Button
-- [ ] Input
-- [ ] Select
-- [ ] Textarea
 - [ ] Modal
 - [ ] Checkbox
 - [ ] Radio
