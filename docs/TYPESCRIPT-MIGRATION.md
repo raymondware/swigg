@@ -61,12 +61,14 @@ When converting a component to TypeScript:
 - [x] Input (with InputProps type)
 - [x] Select (with SelectProps, SelectOption types)
 - [x] Textarea (with TextareaProps, TextareaResize types)
+- [x] Checkbox (with CheckboxProps type)
+- [x] Radio (with RadioProps type)
+- [x] FormGroup (with FormGroupProps type)
+
+**All form components are now TypeScript!** 🎉
 
 ### In Progress 🔄
 - [ ] Modal
-- [ ] Checkbox
-- [ ] Radio
-- [ ] FormGroup
 - [ ] MultiSelect
 - [ ] MainNav
 - [ ] AutoGrid
