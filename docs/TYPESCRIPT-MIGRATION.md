@@ -56,6 +56,8 @@ When converting a component to TypeScript:
 ## Migration Status
 
 ### Completed ✅
+
+**Form Components:**
 - [x] Skeleton
 - [x] Button (with ButtonProps, ButtonVariant types)
 - [x] Input (with InputProps type)
@@ -65,15 +67,21 @@ When converting a component to TypeScript:
 - [x] Radio (with RadioProps type)
 - [x] FormGroup (with FormGroupProps type)
 
-**All form components are now TypeScript!** 🎉
+**Dialog/Overlay:**
+- [x] Modal (with ModalProps, Escape key handling, body scroll lock)
+
+**Multi-Select:**
+- [x] MultiSelect (with MultiSelectProps, MultiSelectItem, MultiSelectRef types)
+
+**Layout Components:**
+- [x] AutoGrid (with AutoGridProps type)
+- [x] MasonryGrid (with MasonryGridProps, MasonryItem types)
+- [x] Gallery (with GalleryProps, GalleryItem types)
+
+**13 components migrated!** 🎉
 
 ### In Progress 🔄
-- [ ] Modal
-- [ ] MultiSelect
 - [ ] MainNav
-- [ ] AutoGrid
-- [ ] MasonryGrid
-- [ ] Gallery
 - [ ] LazyImage
 - [ ] ProjectCard
 - [ ] Toast (if merged from feat/toast-component)
