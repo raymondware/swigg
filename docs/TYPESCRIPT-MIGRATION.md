@@ -78,15 +78,20 @@ When converting a component to TypeScript:
 - [x] MasonryGrid (with MasonryGridProps, MasonryItem types)
 - [x] Gallery (with GalleryProps, GalleryItem types)
 
-**13 components migrated!** 🎉
+*(continued below)*
 
-### In Progress 🔄
-- [ ] MainNav
-- [ ] LazyImage
-- [ ] ProjectCard
-- [ ] Toast (if merged from feat/toast-component)
+**Navigation:**
+- [x] MainNav (with MainNavProps, MainNavLogo, SlideDirection types)
 
-### Not Started
+**Media:**
+- [x] LazyImage (with LazyImageProps type)
+
+**Cards:**
+- [x] ProjectCard (with ProjectCardProps, OverlayProps types)
+
+**16 components migrated!** 🎉
+
+### Not Yet Migrated
 - [ ] Hooks (useClickOutside, etc.)
 - [ ] Themes
 - [ ] Stories (can remain .js for now)
