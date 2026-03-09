@@ -7,41 +7,46 @@
       "name": "Merge Button PR",
       "description": "Merge feat/button-enhancements PR #1",
       "phase": 1,
-      "status": "pending",
-      "passes": false
+      "status": "complete",
+      "passes": true,
+      "completedAt": "2026-03-09"
     },
     {
       "id": "F002",
       "name": "Merge Forms PR",
       "description": "Merge feat/form-enhancements PR #2",
       "phase": 1,
-      "status": "pending",
-      "passes": false
+      "status": "complete",
+      "passes": true,
+      "completedAt": "2026-03-09"
     },
     {
       "id": "F003",
       "name": "Merge Textarea PR",
       "description": "Merge feat/textarea-enhancements PR #3",
       "phase": 1,
-      "status": "pending",
-      "passes": false
+      "status": "complete",
+      "passes": true,
+      "completedAt": "2026-03-09"
     },
     {
       "id": "F004",
       "name": "Merge Toast PR",
       "description": "Merge feat/toast-component PR #4",
       "phase": 1,
-      "status": "pending",
-      "passes": false
+      "status": "complete",
+      "passes": true,
+      "completedAt": "2026-03-09"
     },
     {
       "id": "F005",
       "name": "Merge TypeScript PR",
-      "description": "Merge feat/typescript-foundation PR #5",
+      "description": "Merge feat/typescript-foundation PR #5 with enhancements ported",
       "phase": 1,
-      "status": "pending",
-      "passes": false,
-      "note": "May need to be merged first if others depend on it"
+      "status": "complete",
+      "passes": true,
+      "completedAt": "2026-03-09",
+      "note": "All JS enhancements from PRs #1-4 ported to TypeScript versions"
     },
     {
       "id": "F006",
