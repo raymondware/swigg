@@ -1,189 +1,141 @@
 # Swigg Component Library
 
-> A modern React component library built with styled-components
+> A modern React component library built with styled-components and TypeScript
 
 [![NPM](https://img.shields.io/npm/v/swigg.svg)](https://www.npmjs.com/package/swigg) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+
+## Documentation
+
+- **📚 [Storybook](https://raymondware.github.io/swigg/)** — Interactive component playground
+- **🤖 [CLAUDE.md](./CLAUDE.md)** — AI-friendly documentation with props tables and examples
 
 ## Installation
 
 ```bash
-npm install --save swigg
+npm install --save swigg styled-components
 ```
 
-## Components
+## Quick Start
+
+```tsx
+import { Button, Card, Input, Modal } from 'swigg'
+import { ThemeProvider } from 'styled-components'
+
+// Optional: Custom theme
+const theme = {
+  colors: {
+    primary: '#7162e8',
+    primaryHover: '#5a4dd1'
+  }
+}
+
+function App() {
+  return (
+    <ThemeProvider theme={theme}>
+      <Button variant="primary" size="md">
+        Click Me
+      </Button>
+    </ThemeProvider>
+  )
+}
+```
+
+## Components (22)
+
+### Forms
+- **Button** — 6 variants, 3 sizes, loading state, icons
+- **Input** — Text input with label, error, helpText, sizes
+- **Textarea** — Character count, auto-resize
+- **Dropdown** — Enhanced select with search, multi-select, groups
+- **Checkbox** / **Radio** — Form controls with labels
+- **Select** / **MultiSelect** — Native select components
+
+### Feedback
+- **Modal** — Dialog with sizes (sm/md/lg/fullscreen), header/body/footer
+- **Alert** — Info/success/warning/error banners, dismissible
+- **Toast** — Toast notifications
+- **Tooltip** — 4 positions, hover/click/focus triggers
+- **Badge** / **Tag** — Status indicators, dismissible labels
+- **Skeleton** — Loading placeholders with variants
+
+### Layout
+- **Card** — Elevated/outlined/flat variants with image support
+- **AutoGrid** — Responsive auto-fit grid
+- **Tabs** — Underline/boxed/pills variants
+- **Avatar** / **AvatarGroup** — User avatars with status
+- **MainNav** — Responsive navigation
+- **Gallery** / **MasonryGrid** — Image layouts
+
+## Example Usage
 
 ### Button
-A flexible button component with hover effects and customizable styles.
-
-```jsx
+```tsx
 import { Button } from 'swigg'
 
-const Example = () => (
-  <Button
-    bgOverlay="#7162e8"
-    customStyles="max-width: 200px;"
-    onClick={() => console.log('clicked')}
-  >
-    Click Me
-  </Button>
-)
+<Button variant="primary" size="md">Save</Button>
+<Button variant="destructive" loading>Processing...</Button>
+<Button iconLeft={<SaveIcon />}>Save Changes</Button>
 ```
 
-### MainNav
-A responsive navigation component with mobile support and sticky positioning.
+### Card with Image
+```tsx
+import { Card, CardHeader, CardBody, CardImage, Badge } from 'swigg'
 
-```jsx
-import { MainNav } from 'swigg'
-
-const Example = () => (
-  <MainNav
-    bg="#f8f8f8"
-    fontColor="slateblue"
-    breakPoint="900px"
-    isSticky={true}
-    logo={{
-      url: '/logo.png',
-      alt: "Company Logo"
-    }}
-  >
-    <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-  </MainNav>
-)
+<Card variant="elevated">
+  <CardImage src="/image.jpg" alt="Product" />
+  <CardHeader>
+    <h3>Product Name</h3>
+  </CardHeader>
+  <CardBody>
+    <Badge color="success">In Stock</Badge>
+    <p>$29.99</p>
+  </CardBody>
+</Card>
 ```
 
-### AutoGrid
-A responsive grid layout that automatically adjusts columns based on container width.
+### Modal
+```tsx
+import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'swigg'
 
-```jsx
-import { AutoGrid } from 'swigg'
-
-const Example = () => (
-  <AutoGrid
-    bg="#f5f5f5"
-    minWidth="250px"
-    spacing="25px"
-    padding="25px"
-  >
-    {/* Grid items */}
-    <div>Item 1</div>
-    <div>Item 2</div>
-    <div>Item 3</div>
-  </AutoGrid>
-)
+<Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+  <ModalHeader><h2>Confirm</h2></ModalHeader>
+  <ModalBody>Are you sure?</ModalBody>
+  <ModalFooter>
+    <Button variant="ghost" onClick={() => setIsOpen(false)}>Cancel</Button>
+    <Button onClick={handleConfirm}>Confirm</Button>
+  </ModalFooter>
+</Modal>
 ```
 
-### Gallery
-A responsive image gallery with optional click callbacks.
+### Form
+```tsx
+import { Input, Textarea, Button } from 'swigg'
 
-```jsx
-import { Gallery } from 'swigg'
+<Input
+  label="Email"
+  type="email"
+  helpText="We'll never share your email"
+  required
+/>
 
-const Example = () => (
-  <Gallery
-    bg="#fcfcfc"
-    padding="45px"
-    spacing="25px"
-    colSize="350px"
-    items={[
-      {
-        image: "/image1.jpg",
-        clickCallback: () => console.log('Image 1 clicked')
-      },
-      {
-        image: "/image2.jpg"
-      }
-    ]}
-  />
-)
+<Textarea
+  label="Message"
+  maxLength={500}
+  showCharacterCount
+  autoResize
+/>
+
+<Button type="submit">Send</Button>
 ```
 
-### Skeleton
-Loading placeholder components with shimmer effect.
+## TypeScript
 
-```jsx
-import { Skeleton, ProductSkeleton, CardSkeleton } from 'swigg'
+All component props are exported:
 
-// Basic skeleton
-const LoadingText = () => (
-  <Skeleton
-    width="200px"
-    height="20px"
-    borderRadius="4px"
-  />
-)
-
-// Pre-built product card skeleton
-const LoadingProduct = () => (
-  <ProductSkeleton
-    width="300px"
-    padding="20px"
-  />
-)
-
-// Pre-built card skeleton
-const LoadingCard = () => (
-  <CardSkeleton
-    width="300px"
-    padding="20px"
-  />
-)
+```tsx
+import type { ButtonProps, ModalProps, CardVariant } from 'swigg'
 ```
-
-Available skeleton templates:
-- ProductSkeleton
-- CardSkeleton
-- BlogPostSkeleton
-- CartItemSkeleton
-- ProfileSkeleton
-
-## Props
-
-### Button Props
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| bgOverlay | string | '#7162e8' | Background color |
-| customStyles | string | '' | Additional CSS styles |
-| children | node | required | Button content |
-| onClick | function | undefined | Click handler |
-
-### MainNav Props
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| bg | string | '#fff' | Background color |
-| fontColor | string | '#333' | Text color |
-| breakPoint | string | '800px' | Mobile breakpoint |
-| isSticky | boolean | false | Enable sticky positioning |
-| logo | object | required | Logo configuration |
-
-### AutoGrid Props
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| minWidth | string | '350px' | Minimum column width |
-| spacing | string | '25px' | Gap between items |
-| padding | string | '25px' | Grid padding |
-| bg | string | 'white' | Background color |
-| customStyles | string | '' | Additional CSS styles |
-
-### Skeleton Props
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| width | string | '100%' | Element width |
-| height | string | '20px' | Element height |
-| borderRadius | string | '4px' | Border radius |
-| margin | string | '0' | Margin |
-| baseColor | string | '#eeeeee' | Base color |
-| highlightColor | string | '#f5f5f5' | Shimmer color |
-| circle | boolean | false | Circular shape |
-| customStyles | string | '' | Additional CSS styles |
 
 ## License
 
 MIT © [raymondware](https://github.com/raymondware)
-
-## Setup
-
-Wrap your app with the ThemeProvider:

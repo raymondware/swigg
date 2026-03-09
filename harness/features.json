@@ -163,18 +163,20 @@
       "name": "CLAUDE.md AI Docs",
       "description": "AI-friendly documentation with component inventory, props, examples",
       "phase": 4,
-      "status": "pending",
-      "passes": false,
-      "depends": ["F008", "F009", "F010", "F011", "F012", "F013", "F014", "F015", "F016"]
+      "status": "complete",
+      "passes": true,
+      "completedAt": "2025-03-09",
+      "note": "Created comprehensive CLAUDE.md with all 22 components documented, props tables, code examples, design tokens, and common patterns"
     },
     {
       "id": "F018",
       "name": "Version Bump + Publish Ready",
       "description": "Update version, changelog, prepare for npm publish",
       "phase": 4,
-      "status": "pending",
-      "passes": false,
-      "depends": ["F017"]
+      "status": "complete",
+      "passes": true,
+      "completedAt": "2025-03-09",
+      "note": "Bumped to 0.3.0, created CHANGELOG.md, updated README.md with Storybook and CLAUDE.md links"
     }
   ]
 }
