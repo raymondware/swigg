@@ -17,8 +17,29 @@ const config = {
   "docs": {
     "autodocs": "tag",
   },
+  "typescript": {
+    "reactDocgen": "react-docgen-typescript",
+    "reactDocgenTypescriptOptions": {
+      "shouldExtractLiteralValuesFromEnum": true,
+      "propFilter": (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
+    },
+  },
   "webpackFinal": async (config) => {
-    // Update the rules to handle JavaScript files
+    // Handle TypeScript files with ts-loader
+    config.module.rules.push({
+      test: /\.(ts|tsx)$/,
+      exclude: /node_modules/,
+      use: [
+        {
+          loader: 'ts-loader',
+          options: {
+            transpileOnly: true,
+          },
+        },
+      ],
+    });
+
+    // Handle JavaScript files
     config.module.rules.push({
       test: /\.(js|jsx)$/,
       exclude: /node_modules/,
@@ -34,6 +55,9 @@ const config = {
         }
       }
     });
+
+    // Ensure .ts and .tsx extensions are resolved
+    config.resolve.extensions.push('.ts', '.tsx');
 
     return config;
   },
