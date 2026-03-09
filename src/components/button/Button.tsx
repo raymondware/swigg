@@ -1,6 +1,40 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled, { css, keyframes } from 'styled-components'
+
+export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'link' | 'destructive'
+export type ButtonSize = 'sm' | 'md' | 'lg'
+
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /** Button content */
+  children: React.ReactNode
+  /** Visual style variant */
+  variant?: ButtonVariant
+  /** Size variant */
+  size?: ButtonSize
+  /** Show loading spinner */
+  loading?: boolean
+  /** Full width button */
+  fullWidth?: boolean
+  /** Icon element to show on left */
+  iconLeft?: React.ReactNode
+  /** Icon element to show on right */
+  iconRight?: React.ReactNode
+  /** Custom background color override */
+  bgOverlay?: string
+  /** Additional CSS styles */
+  customStyles?: string
+  /** Render as different element */
+  as?: React.ElementType
+}
+
+interface StyledButtonProps {
+  $variant: ButtonVariant
+  $size: ButtonSize
+  $loading: boolean
+  $fullWidth: boolean
+  $bgOverlay?: string
+  $customStyles?: string
+}
 
 // Spinner animation for loading state
 const spin = keyframes`
@@ -41,36 +75,45 @@ const sizes = {
 // Variant styles
 const variants = {
   primary: css`
-    background: ${props => props.theme?.colors?.primary || '#7162e8'};
+    background: ${(props: { theme?: { colors?: { primary?: string; primaryHover?: string } } }) => 
+      props.theme?.colors?.primary || '#7162e8'};
     color: white;
     border: none;
     
     &:hover:not(:disabled) {
-      background: ${props => props.theme?.colors?.primaryHover || '#5a4dd1'};
+      background: ${(props: { theme?: { colors?: { primaryHover?: string } } }) => 
+        props.theme?.colors?.primaryHover || '#5a4dd1'};
     }
   `,
   secondary: css`
-    background: ${props => props.theme?.colors?.secondary || 'rgba(113, 98, 232, 0.1)'};
-    color: ${props => props.theme?.colors?.primary || '#7162e8'};
-    border: 2px solid ${props => props.theme?.colors?.primary || '#7162e8'};
+    background: ${(props: { theme?: { colors?: { secondary?: string } } }) => 
+      props.theme?.colors?.secondary || 'rgba(113, 98, 232, 0.1)'};
+    color: ${(props: { theme?: { colors?: { primary?: string } } }) => 
+      props.theme?.colors?.primary || '#7162e8'};
+    border: 2px solid ${(props: { theme?: { colors?: { primary?: string } } }) => 
+      props.theme?.colors?.primary || '#7162e8'};
     
     &:hover:not(:disabled) {
-      background: ${props => props.theme?.colors?.secondaryHover || 'rgba(113, 98, 232, 0.2)'};
+      background: ${(props: { theme?: { colors?: { secondaryHover?: string } } }) => 
+        props.theme?.colors?.secondaryHover || 'rgba(113, 98, 232, 0.2)'};
     }
   `,
   outline: css`
     background: transparent;
-    color: ${props => props.theme?.colors?.primary || '#7162e8'};
+    color: ${(props: { theme?: { colors?: { primary?: string } } }) => 
+      props.theme?.colors?.primary || '#7162e8'};
     border: 2px solid currentColor;
     
     &:hover:not(:disabled) {
-      background: ${props => props.theme?.colors?.primary || '#7162e8'};
+      background: ${(props: { theme?: { colors?: { primary?: string } } }) => 
+        props.theme?.colors?.primary || '#7162e8'};
       color: white;
     }
   `,
   ghost: css`
     background: transparent;
-    color: ${props => props.theme?.colors?.primary || '#7162e8'};
+    color: ${(props: { theme?: { colors?: { primary?: string } } }) => 
+      props.theme?.colors?.primary || '#7162e8'};
     border: none;
     
     &:hover:not(:disabled) {
@@ -79,7 +122,8 @@ const variants = {
   `,
   link: css`
     background: transparent;
-    color: ${props => props.theme?.colors?.primary || '#7162e8'};
+    color: ${(props: { theme?: { colors?: { primary?: string } } }) => 
+      props.theme?.colors?.primary || '#7162e8'};
     border: none;
     padding-left: 0;
     padding-right: 0;
@@ -90,17 +134,19 @@ const variants = {
     }
   `,
   destructive: css`
-    background: ${props => props.theme?.colors?.error || '#dc2626'};
+    background: ${(props: { theme?: { colors?: { error?: string } } }) => 
+      props.theme?.colors?.error || '#dc2626'};
     color: white;
     border: none;
     
     &:hover:not(:disabled) {
-      background: ${props => props.theme?.colors?.errorHover || '#b91c1c'};
+      background: ${(props: { theme?: { colors?: { errorHover?: string } } }) => 
+        props.theme?.colors?.errorHover || '#b91c1c'};
     }
   `
 }
 
-const StyledButton = styled.button`
+const StyledButton = styled.button<StyledButtonProps>`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -113,10 +159,10 @@ const StyledButton = styled.button`
   text-decoration: none;
   
   /* Size */
-  ${props => sizes[props.$size] || sizes.md}
+  ${props => sizes[props.$size]}
   
   /* Variant */
-  ${props => variants[props.$variant] || variants.primary}
+  ${props => variants[props.$variant]}
   
   /* Full width */
   ${props => props.$fullWidth && css`
@@ -149,10 +195,10 @@ const StyledButton = styled.button`
     outline-offset: 2px;
   }
 
-  ${props => props.$customStyles}
+  ${props => props.$customStyles && css`${props.$customStyles}`}
 `
 
-const Button = ({
+const Button: React.FC<ButtonProps> = ({
   children,
   variant = 'primary',
   size = 'md',
@@ -161,6 +207,7 @@ const Button = ({
   fullWidth = false,
   iconLeft,
   iconRight,
+  bgOverlay,
   customStyles,
   as,
   ...props
@@ -172,6 +219,7 @@ const Button = ({
       $size={size}
       $loading={loading}
       $fullWidth={fullWidth}
+      $bgOverlay={bgOverlay}
       $customStyles={customStyles}
       disabled={disabled || loading}
       aria-busy={loading}
@@ -183,42 +231,6 @@ const Button = ({
       {!loading && iconRight}
     </StyledButton>
   )
-}
-
-Button.propTypes = {
-  /** Button content */
-  children: PropTypes.node.isRequired,
-  /** Visual variant */
-  variant: PropTypes.oneOf(['primary', 'secondary', 'outline', 'ghost', 'link', 'destructive']),
-  /** Size variant */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
-  /** Show loading spinner */
-  loading: PropTypes.bool,
-  /** Disable button */
-  disabled: PropTypes.bool,
-  /** Full width button */
-  fullWidth: PropTypes.bool,
-  /** Icon element to show on left */
-  iconLeft: PropTypes.node,
-  /** Icon element to show on right */
-  iconRight: PropTypes.node,
-  /** Custom CSS styles */
-  customStyles: PropTypes.string,
-  /** Render as different element (e.g., 'a' for links) */
-  as: PropTypes.elementType,
-  /** Click handler */
-  onClick: PropTypes.func,
-  /** Button type */
-  type: PropTypes.string
-}
-
-Button.defaultProps = {
-  variant: 'primary',
-  size: 'md',
-  loading: false,
-  disabled: false,
-  fullWidth: false,
-  type: 'button'
 }
 
 export default Button

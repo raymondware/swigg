@@ -1,5 +1,57 @@
 const path = require('path')
 
+// Shared config for TypeScript + JavaScript
+const sharedRules = [
+  {
+    test: /\.(ts|tsx)$/,
+    use: [
+      {
+        loader: 'babel-loader'
+      },
+      {
+        loader: 'ts-loader',
+        options: {
+          transpileOnly: true // Faster builds, type-check separately
+        }
+      }
+    ],
+    exclude: /node_modules/
+  },
+  {
+    test: /\.js$/,
+    use: {
+      loader: 'babel-loader'
+    },
+    exclude: /node_modules/
+  },
+  {
+    test: /\.scss$/,
+    use: [
+      { loader: 'style-loader' },
+      { loader: 'css-loader' },
+      { loader: 'sass-loader' }
+    ]
+  },
+  {
+    test: /\.(png|gif|jpg|svg)$/,
+    use: {
+      loader: 'url-loader',
+      options: {
+        limit: 50000
+      }
+    }
+  }
+]
+
+const sharedResolve = {
+  extensions: ['.tsx', '.ts', '.js', '.scss', '.json', '.png', '.gif', '.jpg', '.svg'],
+  alias: {
+    react: path.resolve('./node_modules/react'),
+    'react-dom': path.resolve('./node_modules/react-dom'),
+    'styled-components': path.resolve('./node_modules/styled-components')
+  }
+}
+
 module.exports = [
   // CommonJS build
   {
@@ -16,40 +68,9 @@ module.exports = [
       'prop-types': 'commonjs prop-types'
     },
     module: {
-      rules: [
-        {
-          test: /\.js$/,
-          use: {
-            loader: 'babel-loader'
-          }
-        },
-        {
-          test: /\.scss$/,
-          use: [
-            { loader: 'style-loader' },
-            { loader: 'css-loader' },
-            { loader: 'sass-loader' }
-          ]
-        },
-        {
-          test: /\.(png|gif|jpg|svg)$/,
-          use: {
-            loader: 'url-loader',
-            options: {
-              limit: 50000
-            }
-          }
-        }
-      ]
+      rules: sharedRules
     },
-    resolve: {
-      extensions: ['.scss', '.js', '.json', '.png', '.gif', '.jpg', '.svg'],
-      alias: {
-        react: path.resolve('./node_modules/react'),
-        'react-dom': path.resolve('./node_modules/react-dom'),
-        'styled-components': path.resolve('./node_modules/styled-components')
-      }
-    }
+    resolve: sharedResolve
   },
   // ESM build
   {
@@ -69,39 +90,8 @@ module.exports = [
       'prop-types': 'prop-types'
     },
     module: {
-      rules: [
-        {
-          test: /\.js$/,
-          use: {
-            loader: 'babel-loader'
-          }
-        },
-        {
-          test: /\.scss$/,
-          use: [
-            { loader: 'style-loader' },
-            { loader: 'css-loader' },
-            { loader: 'sass-loader' }
-          ]
-        },
-        {
-          test: /\.(png|gif|jpg|svg)$/,
-          use: {
-            loader: 'url-loader',
-            options: {
-              limit: 50000
-            }
-          }
-        }
-      ]
+      rules: sharedRules
     },
-    resolve: {
-      extensions: ['.scss', '.js', '.json', '.png', '.gif', '.jpg', '.svg'],
-      alias: {
-        react: path.resolve('./node_modules/react'),
-        'react-dom': path.resolve('./node_modules/react-dom'),
-        'styled-components': path.resolve('./node_modules/styled-components')
-      }
-    }
+    resolve: sharedResolve
   }
 ]

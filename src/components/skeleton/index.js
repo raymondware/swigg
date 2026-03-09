@@ -1,3 +1,4 @@
+// TypeScript version - webpack resolves .tsx extension
 export { default } from './Skeleton'
 export {
   ProductSkeleton,

@@ -1,0 +1,155 @@
+{
+  "project": "swigg-design-system",
+  "created": "2026-03-09",
+  "features": [
+    {
+      "id": "F001",
+      "name": "Merge Button PR",
+      "description": "Merge feat/button-enhancements PR #1",
+      "phase": 1,
+      "status": "pending",
+      "passes": false
+    },
+    {
+      "id": "F002",
+      "name": "Merge Forms PR",
+      "description": "Merge feat/form-enhancements PR #2",
+      "phase": 1,
+      "status": "pending",
+      "passes": false
+    },
+    {
+      "id": "F003",
+      "name": "Merge Textarea PR",
+      "description": "Merge feat/textarea-enhancements PR #3",
+      "phase": 1,
+      "status": "pending",
+      "passes": false
+    },
+    {
+      "id": "F004",
+      "name": "Merge Toast PR",
+      "description": "Merge feat/toast-component PR #4",
+      "phase": 1,
+      "status": "pending",
+      "passes": false
+    },
+    {
+      "id": "F005",
+      "name": "Merge TypeScript PR",
+      "description": "Merge feat/typescript-foundation PR #5",
+      "phase": 1,
+      "status": "pending",
+      "passes": false,
+      "note": "May need to be merged first if others depend on it"
+    },
+    {
+      "id": "F006",
+      "name": "GitHub Pages Setup",
+      "description": "Add GitHub Actions workflow for Storybook deploy",
+      "phase": 2,
+      "status": "pending",
+      "passes": false,
+      "depends": ["F001", "F002", "F003", "F004", "F005"]
+    },
+    {
+      "id": "F007",
+      "name": "Deploy Storybook",
+      "description": "Verify Storybook deploys to GitHub Pages",
+      "phase": 2,
+      "status": "pending",
+      "passes": false,
+      "depends": ["F006"]
+    },
+    {
+      "id": "F008",
+      "name": "Add Modal Component",
+      "description": "Modal/Dialog with overlay, close button, sizes",
+      "phase": 3,
+      "status": "pending",
+      "passes": false
+    },
+    {
+      "id": "F009",
+      "name": "Add Dropdown/Select",
+      "description": "Dropdown with search, multi-select option",
+      "phase": 3,
+      "status": "pending",
+      "passes": false
+    },
+    {
+      "id": "F010",
+      "name": "Add Tabs Component",
+      "description": "Tabs with variants (underline, boxed, pills)",
+      "phase": 3,
+      "status": "pending",
+      "passes": false
+    },
+    {
+      "id": "F011",
+      "name": "Add Card Component",
+      "description": "Card with header, body, footer, image support",
+      "phase": 3,
+      "status": "pending",
+      "passes": false
+    },
+    {
+      "id": "F012",
+      "name": "Add Badge/Tag",
+      "description": "Badge with variants (solid, outline), dismissible tags",
+      "phase": 3,
+      "status": "pending",
+      "passes": false
+    },
+    {
+      "id": "F013",
+      "name": "Add Avatar",
+      "description": "Avatar with image, fallback initials, sizes, groups",
+      "phase": 3,
+      "status": "pending",
+      "passes": false
+    },
+    {
+      "id": "F014",
+      "name": "Add Tooltip",
+      "description": "Tooltip with positions, hover/click triggers",
+      "phase": 3,
+      "status": "pending",
+      "passes": false
+    },
+    {
+      "id": "F015",
+      "name": "Add Alert/Banner",
+      "description": "Alert with variants (info, success, warning, error), dismissible",
+      "phase": 3,
+      "status": "pending",
+      "passes": false
+    },
+    {
+      "id": "F016",
+      "name": "Add Skeleton Loaders",
+      "description": "Skeleton with text, circle, rect variants",
+      "phase": 3,
+      "status": "pending",
+      "passes": false
+    },
+    {
+      "id": "F017",
+      "name": "CLAUDE.md AI Docs",
+      "description": "AI-friendly documentation with component inventory, props, examples",
+      "phase": 4,
+      "status": "pending",
+      "passes": false,
+      "depends": ["F008", "F009", "F010", "F011", "F012", "F013", "F014", "F015", "F016"]
+    },
+    {
+      "id": "F018",
+      "name": "Version Bump + Publish Ready",
+      "description": "Update version, changelog, prepare for npm publish",
+      "phase": 4,
+      "status": "pending",
+      "passes": false,
+      "depends": ["F017"]
+    }
+  ]
+}

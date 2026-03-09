@@ -1,6 +1,49 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
+
+export type SelectSize = 'sm' | 'md' | 'lg'
+
+export interface SelectOption {
+  value: string
+  label: string
+  disabled?: boolean
+}
+
+export interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'size'> {
+  /** Label text displayed above the select */
+  label?: string
+  /** Error message to display */
+  error?: string
+  /** Help text shown below select */
+  helpText?: string
+  /** Array of options */
+  options: SelectOption[]
+  /** Size variant */
+  size?: SelectSize
+  /** Show asterisk for required fields */
+  showRequiredIndicator?: boolean
+  /** Placeholder option text */
+  placeholder?: string
+  /** Bottom margin spacing */
+  marginBottom?: string
+  /** Additional CSS styles */
+  customStyles?: string
+}
+
+interface StyledSelectWrapperProps {
+  $marginBottom?: string
+}
+
+interface StyledSelectProps {
+  $error?: boolean
+  $size: SelectSize
+  $customStyles?: string
+}
+
+interface StyledLabelProps {
+  $error?: boolean
+  $size: SelectSize
+}
 
 // Size variants
 const sizes = {
@@ -21,24 +64,22 @@ const sizes = {
   `
 }
 
-const SelectWrapper = styled.div`
+const SelectWrapper = styled.div<StyledSelectWrapperProps>`
   position: relative;
   width: 100%;
   margin-bottom: ${props => props.$marginBottom || '1rem'};
 `
 
-const StyledSelect = styled.select`
+const StyledSelect = styled.select<StyledSelectProps>`
   width: 100%;
-  border: 2px solid ${props =>
-    props.$error ? '#dc3545' : '#dee2e6'
-  };
+  border: 2px solid ${props => props.$error ? '#dc3545' : '#dee2e6'};
   transition: all 0.2s ease;
   background: ${props => props.disabled ? '#f8f9fa' : 'white'};
   appearance: none;
   cursor: pointer;
   
   /* Size variant */
-  ${props => sizes[props.$size] || sizes.md}
+  ${props => sizes[props.$size]}
   
   /* Custom arrow */
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23495057' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
@@ -56,10 +97,10 @@ const StyledSelect = styled.select`
     cursor: not-allowed;
   }
 
-  ${props => props.$customStyles}
+  ${props => props.$customStyles && css`${props.$customStyles}`}
 `
 
-const Label = styled.label`
+const Label = styled.label<StyledLabelProps>`
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 500;
@@ -84,7 +125,7 @@ const ErrorMessage = styled.div`
   margin-top: 0.25rem;
 `
 
-const Select = ({
+const Select: React.FC<SelectProps> = ({
   label,
   error,
   helpText,
@@ -95,18 +136,20 @@ const Select = ({
   placeholder,
   marginBottom,
   customStyles,
+  id,
+  name,
   ...props
 }) => {
-  const id = props.id || props.name || `select-${Math.random().toString(36).substr(2, 9)}`
-  const helpTextId = helpText ? `${id}-help` : undefined
-  const errorId = error ? `${id}-error` : undefined
+  const selectId = id || name || `select-${Math.random().toString(36).substr(2, 9)}`
+  const helpTextId = helpText ? `${selectId}-help` : undefined
+  const errorId = error ? `${selectId}-error` : undefined
   
   const describedBy = [helpTextId, errorId].filter(Boolean).join(' ') || undefined
 
   return (
     <SelectWrapper $marginBottom={marginBottom}>
       {label && (
-        <Label htmlFor={id} $error={error} $size={size}>
+        <Label htmlFor={selectId} $error={!!error} $size={size}>
           {label}
           {required && showRequiredIndicator && (
             <RequiredIndicator aria-hidden="true">*</RequiredIndicator>
@@ -114,8 +157,9 @@ const Select = ({
         </Label>
       )}
       <StyledSelect
-        id={id}
-        $error={error}
+        id={selectId}
+        name={name}
+        $error={!!error}
         $size={size}
         $customStyles={customStyles}
         required={required}
@@ -142,47 +186,6 @@ const Select = ({
       )}
     </SelectWrapper>
   )
-}
-
-Select.propTypes = {
-  /** Label text */
-  label: PropTypes.string,
-  /** Error message */
-  error: PropTypes.string,
-  /** Help text shown below select */
-  helpText: PropTypes.string,
-  /** Options array */
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      value: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
-      disabled: PropTypes.bool
-    })
-  ).isRequired,
-  /** Size variant */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
-  /** Is field required */
-  required: PropTypes.bool,
-  /** Show asterisk for required fields */
-  showRequiredIndicator: PropTypes.bool,
-  /** Placeholder option text */
-  placeholder: PropTypes.string,
-  /** Bottom margin */
-  marginBottom: PropTypes.string,
-  /** Custom CSS styles */
-  customStyles: PropTypes.string,
-  /** Select id */
-  id: PropTypes.string,
-  /** Select name */
-  name: PropTypes.string,
-  /** Disabled state */
-  disabled: PropTypes.bool
-}
-
-Select.defaultProps = {
-  size: 'md',
-  required: false,
-  showRequiredIndicator: true
 }
 
 export default Select

@@ -1,6 +1,39 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
+
+export type InputSize = 'sm' | 'md' | 'lg'
+
+export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
+  /** Label text displayed above the input */
+  label?: string
+  /** Error message to display */
+  error?: string
+  /** Help text shown below input */
+  helpText?: string
+  /** Size variant */
+  size?: InputSize
+  /** Show asterisk for required fields */
+  showRequiredIndicator?: boolean
+  /** Bottom margin spacing */
+  marginBottom?: string
+  /** Additional CSS styles */
+  customStyles?: string
+}
+
+interface StyledInputWrapperProps {
+  $marginBottom?: string
+}
+
+interface StyledInputProps {
+  $error?: boolean
+  $size: InputSize
+  $customStyles?: string
+}
+
+interface StyledLabelProps {
+  $error?: boolean
+  $size: InputSize
+}
 
 // Size variants
 const sizes = {
@@ -21,22 +54,20 @@ const sizes = {
   `
 }
 
-const InputWrapper = styled.div`
+const InputWrapper = styled.div<StyledInputWrapperProps>`
   position: relative;
   width: 100%;
   margin-bottom: ${props => props.$marginBottom || '1rem'};
 `
 
-const StyledInput = styled.input`
+const StyledInput = styled.input<StyledInputProps>`
   width: 100%;
-  border: 2px solid ${props =>
-    props.$error ? '#dc3545' : '#dee2e6'
-  };
+  border: 2px solid ${props => props.$error ? '#dc3545' : '#dee2e6'};
   transition: all 0.2s ease;
   background: ${props => props.disabled ? '#f8f9fa' : 'white'};
   
   /* Size variant */
-  ${props => sizes[props.$size] || sizes.md}
+  ${props => sizes[props.$size]}
   
   &:focus {
     outline: none;
@@ -52,10 +83,10 @@ const StyledInput = styled.input`
     cursor: not-allowed;
   }
 
-  ${props => props.$customStyles}
+  ${props => props.$customStyles && css`${props.$customStyles}`}
 `
 
-const Label = styled.label`
+const Label = styled.label<StyledLabelProps>`
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 500;
@@ -80,7 +111,7 @@ const ErrorMessage = styled.div`
   margin-top: 0.25rem;
 `
 
-const Input = ({
+const Input: React.FC<InputProps> = ({
   label,
   error,
   helpText,
@@ -89,11 +120,13 @@ const Input = ({
   showRequiredIndicator = true,
   marginBottom,
   customStyles,
+  id,
+  name,
   ...props
 }) => {
-  const id = props.id || props.name || `input-${Math.random().toString(36).substr(2, 9)}`
-  const helpTextId = helpText ? `${id}-help` : undefined
-  const errorId = error ? `${id}-error` : undefined
+  const inputId = id || name || `input-${Math.random().toString(36).substr(2, 9)}`
+  const helpTextId = helpText ? `${inputId}-help` : undefined
+  const errorId = error ? `${inputId}-error` : undefined
   
   // Combine aria-describedby values
   const describedBy = [helpTextId, errorId].filter(Boolean).join(' ') || undefined
@@ -101,7 +134,7 @@ const Input = ({
   return (
     <InputWrapper $marginBottom={marginBottom}>
       {label && (
-        <Label htmlFor={id} $error={error} $size={size}>
+        <Label htmlFor={inputId} $error={!!error} $size={size}>
           {label}
           {required && showRequiredIndicator && (
             <RequiredIndicator aria-hidden="true">*</RequiredIndicator>
@@ -109,8 +142,9 @@ const Input = ({
         </Label>
       )}
       <StyledInput
-        id={id}
-        $error={error}
+        id={inputId}
+        name={name}
+        $error={!!error}
         $size={size}
         $customStyles={customStyles}
         required={required}
@@ -126,42 +160,6 @@ const Input = ({
       )}
     </InputWrapper>
   )
-}
-
-Input.propTypes = {
-  /** Label text */
-  label: PropTypes.string,
-  /** Error message */
-  error: PropTypes.string,
-  /** Help text shown below input */
-  helpText: PropTypes.string,
-  /** Size variant */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
-  /** Is field required */
-  required: PropTypes.bool,
-  /** Show asterisk for required fields */
-  showRequiredIndicator: PropTypes.bool,
-  /** Bottom margin */
-  marginBottom: PropTypes.string,
-  /** Custom CSS styles */
-  customStyles: PropTypes.string,
-  /** Input id */
-  id: PropTypes.string,
-  /** Input name */
-  name: PropTypes.string,
-  /** Input type */
-  type: PropTypes.string,
-  /** Disabled state */
-  disabled: PropTypes.bool,
-  /** Placeholder text */
-  placeholder: PropTypes.string
-}
-
-Input.defaultProps = {
-  size: 'md',
-  required: false,
-  showRequiredIndicator: true,
-  type: 'text'
 }
 
 export default Input

@@ -1,6 +1,54 @@
 import React, { useState, useRef, useEffect } from 'react'
-import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
+
+export type TextareaSize = 'sm' | 'md' | 'lg'
+export type TextareaResize = 'none' | 'vertical' | 'horizontal' | 'both'
+
+export interface TextareaProps extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'size'> {
+  /** Label text displayed above the textarea */
+  label?: string
+  /** Error message to display */
+  error?: string
+  /** Help text shown below textarea */
+  helpText?: string
+  /** Size variant */
+  size?: TextareaSize
+  /** Show asterisk for required fields */
+  showRequiredIndicator?: boolean
+  /** Bottom margin spacing */
+  marginBottom?: string
+  /** Additional CSS styles */
+  customStyles?: string
+  /** Minimum height of the textarea */
+  minHeight?: string
+  /** Resize behavior */
+  resize?: TextareaResize
+  /** Show character count */
+  showCharacterCount?: boolean
+  /** Auto-resize to fit content */
+  autoResize?: boolean
+}
+
+interface StyledTextareaWrapperProps {
+  $marginBottom?: string
+}
+
+interface StyledTextareaProps {
+  $error?: boolean
+  $size: TextareaSize
+  $customStyles?: string
+  $minHeight?: string
+  $resize?: TextareaResize
+}
+
+interface StyledLabelProps {
+  $error?: boolean
+  $size: TextareaSize
+}
+
+interface CharacterCountProps {
+  $isOver?: boolean
+}
 
 // Size variants
 const sizes = {
@@ -24,17 +72,15 @@ const sizes = {
   `
 }
 
-const TextareaWrapper = styled.div`
+const TextareaWrapper = styled.div<StyledTextareaWrapperProps>`
   position: relative;
   width: 100%;
   margin-bottom: ${props => props.$marginBottom || '1rem'};
 `
 
-const StyledTextarea = styled.textarea`
+const StyledTextarea = styled.textarea<StyledTextareaProps>`
   width: 100%;
-  border: 2px solid ${props =>
-    props.$error ? '#dc3545' : '#dee2e6'
-  };
+  border: 2px solid ${props => props.$error ? '#dc3545' : '#dee2e6'};
   font-family: inherit;
   line-height: 1.5;
   transition: all 0.2s ease;
@@ -42,7 +88,7 @@ const StyledTextarea = styled.textarea`
   background: ${props => props.disabled ? '#f8f9fa' : 'white'};
   
   /* Size variant */
-  ${props => sizes[props.$size] || sizes.md}
+  ${props => sizes[props.$size]}
   
   /* Custom min-height override */
   ${props => props.$minHeight && css`
@@ -63,10 +109,10 @@ const StyledTextarea = styled.textarea`
     cursor: not-allowed;
   }
 
-  ${props => props.$customStyles}
+  ${props => props.$customStyles && css`${props.$customStyles}`}
 `
 
-const Label = styled.label`
+const Label = styled.label<StyledLabelProps>`
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 500;
@@ -91,7 +137,7 @@ const ErrorMessage = styled.div`
   margin-top: 0.25rem;
 `
 
-const CharacterCount = styled.div`
+const CharacterCount = styled.div<CharacterCountProps>`
   color: ${props => props.$isOver ? '#dc3545' : '#6c757d'};
   font-size: 0.75rem;
   margin-top: 0.25rem;
@@ -105,7 +151,7 @@ const Footer = styled.div`
   gap: 1rem;
 `
 
-const Textarea = ({
+const Textarea: React.FC<TextareaProps> = ({
   label,
   error,
   helpText,
@@ -122,16 +168,18 @@ const Textarea = ({
   value,
   defaultValue,
   onChange,
+  id,
+  name,
   ...props
 }) => {
-  const id = props.id || props.name || `textarea-${Math.random().toString(36).substr(2, 9)}`
-  const helpTextId = helpText ? `${id}-help` : undefined
-  const errorId = error ? `${id}-error` : undefined
-  const textareaRef = useRef(null)
+  const textareaId = id || name || `textarea-${Math.random().toString(36).substr(2, 9)}`
+  const helpTextId = helpText ? `${textareaId}-help` : undefined
+  const errorId = error ? `${textareaId}-error` : undefined
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
   
   // Track character count for controlled and uncontrolled components
   const [charCount, setCharCount] = useState(
-    (value || defaultValue || '').length
+    ((value as string) || (defaultValue as string) || '').length
   )
   
   // Combine aria-describedby values
@@ -145,7 +193,7 @@ const Textarea = ({
     }
   }, [value, autoResize])
   
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setCharCount(e.target.value.length)
     
     if (autoResize && textareaRef.current) {
@@ -158,13 +206,13 @@ const Textarea = ({
     }
   }
   
-  const isOverLimit = maxLength && charCount > maxLength
+  const isOverLimit = maxLength !== undefined && charCount > maxLength
   const showFooter = (helpText && !error) || error || showCharacterCount
 
   return (
     <TextareaWrapper $marginBottom={marginBottom}>
       {label && (
-        <Label htmlFor={id} $error={error} $size={size}>
+        <Label htmlFor={textareaId} $error={!!error} $size={size}>
           {label}
           {required && showRequiredIndicator && (
             <RequiredIndicator aria-hidden="true">*</RequiredIndicator>
@@ -173,8 +221,9 @@ const Textarea = ({
       )}
       <StyledTextarea
         ref={textareaRef}
-        id={id}
-        $error={error}
+        id={textareaId}
+        name={name}
+        $error={!!error}
         $size={size}
         $customStyles={customStyles}
         $minHeight={minHeight}
@@ -207,60 +256,6 @@ const Textarea = ({
       )}
     </TextareaWrapper>
   )
-}
-
-Textarea.propTypes = {
-  /** Label text */
-  label: PropTypes.string,
-  /** Error message */
-  error: PropTypes.string,
-  /** Help text shown below textarea */
-  helpText: PropTypes.string,
-  /** Size variant */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
-  /** Is field required */
-  required: PropTypes.bool,
-  /** Show asterisk for required fields */
-  showRequiredIndicator: PropTypes.bool,
-  /** Bottom margin */
-  marginBottom: PropTypes.string,
-  /** Custom CSS styles */
-  customStyles: PropTypes.string,
-  /** Custom minimum height */
-  minHeight: PropTypes.string,
-  /** Resize behavior */
-  resize: PropTypes.oneOf(['none', 'vertical', 'horizontal', 'both']),
-  /** Maximum character length */
-  maxLength: PropTypes.number,
-  /** Show character count */
-  showCharacterCount: PropTypes.bool,
-  /** Auto-resize to fit content */
-  autoResize: PropTypes.bool,
-  /** Controlled value */
-  value: PropTypes.string,
-  /** Default value for uncontrolled */
-  defaultValue: PropTypes.string,
-  /** Change handler */
-  onChange: PropTypes.func,
-  /** Textarea id */
-  id: PropTypes.string,
-  /** Textarea name */
-  name: PropTypes.string,
-  /** Disabled state */
-  disabled: PropTypes.bool,
-  /** Placeholder text */
-  placeholder: PropTypes.string,
-  /** Number of visible rows */
-  rows: PropTypes.number
-}
-
-Textarea.defaultProps = {
-  size: 'md',
-  required: false,
-  showRequiredIndicator: true,
-  resize: 'vertical',
-  showCharacterCount: false,
-  autoResize: false
 }
 
 export default Textarea
