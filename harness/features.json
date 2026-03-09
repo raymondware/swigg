@@ -53,18 +53,20 @@
       "name": "GitHub Pages Setup",
       "description": "Add GitHub Actions workflow for Storybook deploy",
       "phase": 2,
-      "status": "pending",
-      "passes": false,
-      "depends": ["F001", "F002", "F003", "F004", "F005"]
+      "status": "complete",
+      "passes": true,
+      "completedAt": "2026-03-09",
+      "note": "Workflow created. Build succeeds. Awaiting Pages enablement in repo settings."
     },
     {
       "id": "F007",
       "name": "Deploy Storybook",
       "description": "Verify Storybook deploys to GitHub Pages",
       "phase": 2,
-      "status": "pending",
+      "status": "blocked",
       "passes": false,
-      "depends": ["F006"]
+      "depends": ["F006"],
+      "blockedBy": "GitHub Pages must be enabled in repo settings (Settings > Pages > Source: GitHub Actions)"
     },
     {
       "id": "F008",
